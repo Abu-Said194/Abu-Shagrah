@@ -1,73 +1,79 @@
 <!DOCTYPE html>
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Web Abu-Shagrah</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://kit.fontawesome.com/247d417c90.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Web Abu-Shagrah</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
 <html lang= "de">
 	<head>
 		<meta charset="UTF-8">
 			<title>Abu-Shagrah</title>
 		<style>
-			.ABU {display: block; margin: auto; width: 60%; heigt: auto;}
-		
-		nav a{float:left; text-decoration:none; color:#002e5b; font-size:18px; padding: 25px 35px; display:inline-block; transition: all 0.5s ease 0s;}
-		nav a:hover{background-color:#002e5b; color:#fde428; transition: all 0.5s ease 0s;}
-		header{overflow:hidden; background-color:#fde428; margin-bottom:50px;}
-		body{margin:0px; padding:0px; font-family: 'Open Sans', sans-serif;}
-		
-		
-		section{width:100%; max-width:1200px; margin:0px auto;}
-		.inhalt{margin-bottom:60px; width:750px; margin-top:60px color:#FFFFFF}
-		
-		.inhalt h2{font-size:18px; font-weight:500; color:#002e5b; border-bottom:1px solid #fde428; padding-bottom:10px; margin-bottom:10px;}
-		.inhalt p{font-size:14px; line-height:22px; color:#7c7c7c; text-align:justify;}
-		
-		
-		
-		</style>
-		
-		
-		
-		
-		
-		
-	
-	</head>
+      
+      .ABU {display: block; width:	80%; heigt: auto ; margin-left: auto; margin-right: auto; margin-bottom: auto%; margin-top: auto;}
+     
+         </style>
+    
+    	</head>
 	<body>
-		<img src="ABU1.jpg" class=ABU  alt="Abu-Shagrah"/>
-	
-	<header>
-		<section>
-			
-				<nav>
-					<a href="#Startseite">Startseite</a>
-					<a href="#Meinearbeit">Meine Arbeit</a>
-					<a href="#Kontaktdaten">Kontaktdaten</a>
-				</nav>
-	
-		</section>
-		
-		<section id="#Startseite" class="inhalt">
-			<h2>HTML</h2>
-			<p>In this tutorial, we have built an example of responsive navigation menu with HTML and CSS only. Using the andchor tab we have navigated within the page only. 
-			   But if you prefer you can change the href value to any other external link to navigate to the link. </p>
-		
-		</section>
-		
-		<section id="#Meinearbeit" class="inhalt">
-			<h2>HTML</h2>
-			<p>In this tutorial, we have built an example of responsive navigation menu with HTML and CSS only. Using the andchor tab we have navigated within the page only. 
-			   But if you prefer you can change the href value to any other external link to navigate to the link. </p>
-		
-		</section>
-		
-		<section id="#Kontaktdaten" class="inhalt">
-			<h2>HTML</h2>
-			<p>In this tutorial, we have built an example of responsive navigation menu with HTML and CSS only. Using the andchor tab we have navigated within the page only. 
-			   But if you prefer you can change the href value to any other external link to navigate to the link. </p>
-		
-		</section>
-	</header>
-	
-	
-	</body>
+	<img src="Abu-Shagrah Überschrift.png" class=ABU  alt="Abu-Shagrah"/>
+     <div id="navbar">
+        <nav>
+<button class="tablink" onclick="openPage('Home', this, '#FBC02D')" id="defaultOpen">
+    <i class="fa-solid fa-house"></i>
+     </button>
+<button class="tablink" onclick="openPage('News', this,'White')" >
+        <i class="fa-solid fa-briefcase"></i>  
+   </button>
+          
+<button class="tablink" onclick="openPage('Contact', this,'White')">
+            <i class="fa-solid fa-address-card fa-fade" ></i>
+   </button>
+         
+        </nav>
+    </div> 
+    
+    
+<div id="Home" class="tabcontent" style="text-align:center">
+  <h3>Homepage</h3>
+  <p> Wir bieten Umzug, Renovierung, sowie die Montage von Werbeanlagen an
+	</p>
+</div>
+
+<div id="News" class="tabcontent" style="text-align:center">
+  <h3>Kommt Demmächste</h3>
+  <p>...</p>
+</div>
+
+<div id="Contact" class="tabcontent" style="text-align:center">
+  <h3>Kontaktdaten</h3>
+  <p><i class="fa-solid fa-phone fa-shake"></i> +49 173 8401400</p>
+  <p><i class="fa-solid fa-envelope fa-bounce"></i> abu-shagrah@web.de</p>
+</div>
+
+
+    
+    </body>
 
 
 
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
 </html>
