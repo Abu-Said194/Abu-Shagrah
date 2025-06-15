@@ -104,6 +104,7 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: box-shadow 0.3s ease;
+      position: relative;
     }
     .bubble:hover {
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
@@ -111,11 +112,10 @@
 
     .bubble img {
       max-width: 100%;
-      max-height: 150px;
+      height: auto;
+      margin-top: 1rem;
+      border-radius: 8px;
       display: block;
-      margin-top: 0.8rem;
-      border-radius: 6px;
-      object-fit: cover;
     }
 
     a {
@@ -262,62 +262,43 @@
     </div>
 
     <div class="bubble slide-in" data-fullscreen-id="tapezieren">
-      <h3>Tapezierarbeiten – Stilvolle Wände für mehr Wohlfühlatmosphäre</h3>
-      <p>Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.</p>
+      <h3>Tapezieren & Malerarbeiten – Dekorativ und hochwertig</h3>
+      <p>Von klassisch bis modern – wir bringen Farbe und Stil an Ihre Wände. Sauber, exakt und mit viel Liebe zum Detail.</p>
     </div>
 
-    <div id="garten-blase" class="slide-in" data-fullscreen-id="garten">
+    <div id="garten-blase" class="bubble slide-in" data-fullscreen-id="garten">
       <div class="overlay"></div>
       <div class="content">
-        <h3>Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen</h3>
-        <p>Wir gestalten Ihren Garten nach Maß, mit Liebe zum Detail und praktischen Lösungen – vom Rollrasen bis zur Überdachung Ihrer Fahrradständer.</p>
+        <h3>Garten- und Landschaftsbau – Ihre grüne Oase</h3>
+        <p>Wir gestalten und pflegen Ihre Außenanlagen mit Know-how und Kreativität. Von Rollrasen bis zur Gartenbepflanzung: Erleben Sie Natur zum Wohlfühlen.</p>
       </div>
     </div>
   </div>
 
   <div id="Contact" class="tabcontent">
-    <h2 class="slide-in">Kontaktieren Sie uns</h2>
-    <p class="slide-in">Telefon: 01234 567890</p>
-    <p class="slide-in">Email: info@abu-shagrah.de</p>
-    <p class="slide-in">Adresse: Musterstraße 12, 12345 Musterstadt</p>
+    <h2>Kontakt</h2>
+    <p>Sie möchten Ihr Projekt mit uns besprechen? Wir freuen uns auf Ihre Nachricht!</p>
+    <p><strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt</p>
+    <p><strong>Telefon:</strong> 01234 567890</p>
+    <p><strong>Email:</strong> <a href="mailto:info@abu-shagrah.de">info@abu-shagrah.de</a></p>
   </div>
 
-  <!-- Vollbild-Container wird dynamisch erzeugt -->
-
   <script>
-    // Tab-Funktion
+    // Tabs öffnen
     function openPage(evt, pageName) {
-      const tabcontent = document.querySelectorAll('.tabcontent');
-      tabcontent.forEach(tc => tc.classList.remove('active'));
+      const tabcontents = document.querySelectorAll(".tabcontent");
+      tabcontents.forEach(tc => tc.classList.remove("active"));
 
-      const tablinks = document.querySelectorAll('.tablink');
-      tablinks.forEach(tl => tl.classList.remove('active'));
+      const tablinks = document.querySelectorAll(".tablink");
+      tablinks.forEach(tl => tl.classList.remove("active"));
 
-      document.getElementById(pageName).classList.add('active');
-      evt.currentTarget.classList.add('active');
+      document.getElementById(pageName).classList.add("active");
+      evt.currentTarget.classList.add("active");
     }
 
-    document.getElementById('defaultOpen').click();
+    document.getElementById("defaultOpen").click();
 
-    // Animation slide-in beim Scrollen
-    function slideIn() {
-      const sliders = document.querySelectorAll('.slide-in');
-      const triggerBottom = window.innerHeight * 0.9;
-
-      sliders.forEach(slider => {
-        const boxTop = slider.getBoundingClientRect().top;
-        if (boxTop < triggerBottom) {
-          slider.classList.add('visible');
-        } else {
-          slider.classList.remove('visible');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', slideIn);
-    window.addEventListener('load', slideIn);
-
-    // Bilder für Vollbildansicht pro Bubble
+    // Bilder pro Kategorie
     const bubblesWithImages = {
       renovierung: ["renovierung1.jpg", "renovierung2.jpg"],
       trockenbau: ["trockenbau1.jpg", "trockenbau2.jpg"],
@@ -326,87 +307,12 @@
       garten: ["garten1.jpg", "garten2.jpg"]
     };
 
-    // Funktion zum Erzeugen und Anzeigen der Vollbild-Bubble
-    function showFullscreenBubble(id) {
-      // Existiert schon Vollbild, dann entfernen
-      let existing = document.querySelector('.fullscreen-bubble');
-      if (existing) {
-        existing.remove();
-      }
-
-      const data = {
-        renovierung: {
-          title: "Renovierungsarbeiten – Frischer Wind für Ihr Zuhause",
-          text: "Ob einzelne Räume oder komplette Sanierungen: Wir renovieren fachgerecht, termintreu und mit viel Liebe zum Detail. Von Boden bis Decke – wir schaffen Wohnqualität, die begeistert.",
-          images: bubblesWithImages.renovierung
-        },
-        trockenbau: {
-          title: "Trockenbau – Flexible Raumlösungen",
-          text: "Trennwände, Deckenabhängungen oder Verkleidungen – wir setzen Ihre Wünsche im Trockenbau passgenau um und sorgen für funktionale und optisch ansprechende Ergebnisse.",
-          images: bubblesWithImages.trockenbau
-        },
-        küchenmontage: {
-          title: "Küchenmontage – Perfekt eingebaut und anschlussfertig",
-          text: "Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.",
-          images: bubblesWithImages.küchenmontage
-        },
-        tapezieren: {
-          title: "Tapezierarbeiten – Stilvolle Wände für mehr Wohlfühlatmosphäre",
-          text: "Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.",
-          images: bubblesWithImages.tapezieren
-        },
-        garten: {
-          title: "Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen",
-          text: "Wir gestalten Ihren Garten nach Maß, mit Liebe zum Detail und praktischen Lösungen – vom Rollrasen bis zur Überdachung Ihrer Fahrradständer.",
-          images: bubblesWithImages.garten
-        }
-      };
-
-      const info = data[id];
-      if (!info) return;
-
-      const fullscreen = document.createElement('div');
-      fullscreen.classList.add('fullscreen-bubble');
-
-      const closeBtn = document.createElement('button');
-      closeBtn.className = 'close-btn';
-      closeBtn.textContent = '✕ Schließen';
-      closeBtn.addEventListener('click', () => fullscreen.remove());
-
-      fullscreen.appendChild(closeBtn);
-
-      const h3 = document.createElement('h3');
-      h3.textContent = info.title;
-      fullscreen.appendChild(h3);
-
-      const p = document.createElement('p');
-      p.textContent = info.text;
-      fullscreen.appendChild(p);
-
-      info.images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = info.title;
-        fullscreen.appendChild(img);
-      });
-
-      document.body.appendChild(fullscreen);
-      fullscreen.scrollTo(0, 0);
-    }
-
-    // Blasen klicken -> Vollbild öffnen
-    document.querySelectorAll('.bubble, #garten-blase').forEach(bubble => {
-      bubble.addEventListener('click', () => {
-        const id = bubble.getAttribute('data-fullscreen-id');
-        if (id) {
-          showFullscreenBubble(id);
-        }
-      });
-    });
-
-    // Dynamisch für jede Bubble nur das erste Bild als Vorschau einfügen
+    // Vorschau-Bild in Blasen einfügen (nur erstes Bild)
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.bubble[data-fullscreen-id]').forEach(bubble => {
+        // Bilder aus Bubble entfernen (falls welche vorhanden)
+        bubble.querySelectorAll('img').forEach(img => img.remove());
+
         const id = bubble.getAttribute('data-fullscreen-id');
         const images = bubblesWithImages[id];
         if (images && images.length > 0) {
@@ -417,6 +323,59 @@
         }
       });
     });
+
+    // Vollbildanzeige
+    document.querySelectorAll('.bubble[data-fullscreen-id]').forEach(bubble => {
+      bubble.addEventListener('click', () => {
+        const id = bubble.getAttribute('data-fullscreen-id');
+        const images = bubblesWithImages[id];
+        if (!images) return;
+
+        // Vollbild-Bubble erzeugen
+        const fullscreen = document.createElement('div');
+        fullscreen.classList.add('fullscreen-bubble');
+
+        // Close Button
+        const closeBtn = document.createElement('button');
+        closeBtn.classList.add('close-btn');
+        closeBtn.textContent = "Schließen";
+        closeBtn.addEventListener('click', () => {
+          document.body.removeChild(fullscreen);
+        });
+        fullscreen.appendChild(closeBtn);
+
+        // Titel & Text kopieren aus Bubble
+        const title = document.createElement('h3');
+        title.textContent = bubble.querySelector('h3').textContent;
+        fullscreen.appendChild(title);
+
+        const text = document.createElement('p');
+        text.textContent = bubble.querySelector('p').textContent;
+        fullscreen.appendChild(text);
+
+        // Alle Bilder reinladen (Vollbild)
+        images.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = title.textContent + ' Bild';
+          fullscreen.appendChild(img);
+        });
+
+        document.body.appendChild(fullscreen);
+      });
+    });
+
+    // Animation slide-in on scroll
+    function slideInOnScroll() {
+      document.querySelectorAll('.slide-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', slideInOnScroll);
+    slideInOnScroll();
   </script>
 </body>
 </html>
