@@ -1,23 +1,50 @@
-function openPage(pageName, elmnt, color) {
-  // Hide all elements with class="tabcontent" by default */
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+// Tab-Funktion
+function openPage(evt, pageName) {
+  // Alle tabcontent ausblenden
+  let tabcontent = document.querySelectorAll(".tabcontent");
+  tabcontent.forEach(tc => tc.classList.remove("active"));
 
-  // Remove the background color of all tablinks/buttons
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
+  // Alle Buttons in der Navbar deaktivieren
+  let tablinks = document.querySelectorAll(".tablink");
+  tablinks.forEach(btn => btn.classList.remove("active"));
 
-  // Show the specific tab content
-  document.getElementById(pageName).style.display = "block";
+  // Alle rechten Punkte deaktivieren
+  let navDots = document.querySelectorAll("#nav-dots a");
+  navDots.forEach(dot => dot.classList.remove("active"));
 
-  // Add the specific color to the button used to open the tab content
-  elmnt.style.backgroundColor = color;
+  // Die gewählte Seite zeigen
+  document.getElementById(pageName).classList.add("active");
+
+  // Den geklickten Button aktivieren
+  evt.currentTarget.classList.add("active");
+
+  // Auch den rechten Punkt aktivieren, der zum Tab passt
+  navDots.forEach(dot => {
+    if(dot.getAttribute("href") === "#" + pageName) {
+      dot.classList.add("active");
+    }
+  });
 }
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+// Standard-Tab öffnen beim Laden
+document.addEventListener("DOMContentLoaded", () => {
+  const defaultTab = document.getElementById("defaultOpen");
+  if (defaultTab) {
+    defaultTab.click();
+  }
+});
+
+// GSAP + ScrollMagic Animationen (optional, wenn du die libs einbindest)
+if(window.gsap && window.ScrollMagic){
+  const controller = new ScrollMagic.Controller();
+  document.querySelectorAll(".slide").forEach(slide => {
+    const tween = gsap.from(slide, {opacity: 0, y: 80, duration: 0.6, ease: "power2.out"});
+    new ScrollMagic.Scene({
+      triggerElement: slide,
+      triggerHook: 0.85,
+      reverse: false
+    })
+    .setTween(tween)
+    .addTo(controller);
+  });
+}
