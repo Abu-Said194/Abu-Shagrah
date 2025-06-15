@@ -96,7 +96,6 @@
       padding-left: 1.2rem;
     }
 
-    /* Blasen für Dienstleistungen */
     .bubble {
       background: #e0f7f7;
       border-radius: 16px;
@@ -105,7 +104,6 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    /* Optional: Linkfarben */
     a {
       color: #008f8f;
       text-decoration: none;
@@ -114,7 +112,6 @@
       text-decoration: underline;
     }
 
-    /* Neue Styles für Gartengestaltung-Blase mit Hintergrundbild und Overlay */
     #garten-blase {
       position: relative;
       color: white;
@@ -156,7 +153,6 @@
     </button>
   </nav>
 
-  <!-- Home -->
   <div id="Home" class="tabcontent">
     <h1 class="slide-in">25 Jahre Handwerk mit Leidenschaft & Präzision</h1>
     <p class="slide-in">
@@ -181,7 +177,6 @@
     </section>
   </div>
 
-  <!-- Dienstleistungen -->
   <div id="Dienstleistungen" class="tabcontent">
     <div class="bubble slide-in">
       <h3>Renovierungsarbeiten – Frischer Wind für Ihr Zuhause</h3>
@@ -201,9 +196,9 @@
     <div class="bubble slide-in">
       <h3>Tapezierarbeiten – Stilvolle Wände für mehr Wohlfühlatmosphäre</h3>
       <p>Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.</p>
+      <img src="IMG_20181208_191937.jpg" alt="Tapezierarbeit Beispiel" style="width:100%; border-radius:8px; margin-top:10px;" />
     </div>
 
-    <!-- Gartengestaltung mit Hintergrundbild und Overlay -->
     <div id="garten-blase" class="slide-in">
       <div class="overlay"></div>
       <div class="content">
@@ -219,7 +214,6 @@
     </div>
   </div>
 
-  <!-- Kontakt (ohne magic scroll) -->
   <div id="Contact" class="tabcontent" style="text-align:center;">
     <h2>Kontaktieren Sie uns</h2>
     <p>Sie haben Fragen oder möchten Ihr Projekt besprechen? Wir sind gern für Sie da!</p>
@@ -229,7 +223,6 @@
   </div>
 
   <script>
-    // Tab-Funktion
     function openPage(evt, pageName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -244,10 +237,8 @@
       evt.currentTarget.classList.add("active");
     }
 
-    // Standard-Tab öffnen
     document.getElementById("defaultOpen").click();
 
-    // ScrollMagic Animation für .slide-in Elemente (bleibt erhalten für Home & Dienstleistungen)
     function checkSlide() {
       const slideIns = document.querySelectorAll('.slide-in');
       slideIns.forEach(el => {
