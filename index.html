@@ -133,7 +133,7 @@
       border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       overflow: hidden;
-      background: url('bilder/garten/IMG-20200503-WA0004.jpg') center center / cover no-repeat;
+      background: url('IMG-20200503-WA0004.jpg') center center / cover no-repeat;
       cursor: pointer;
       transition: box-shadow 0.3s ease;
     }
@@ -262,226 +262,143 @@
     </div>
 
     <div class="bubble slide-in" data-fullscreen-id="tapezieren">
-      <h3>Tapezieren & Malerarbeiten</h3>
-      <p>Wir bringen frische Farbe an Ihre Wände, tapezieren fachmännisch und sorgen für ein perfektes Finish – ganz nach Ihrem Geschmack.</p>
+      <h3>Tapezieren – Kreative Wandgestaltung</h3>
+      <p>Vom klassischen Anstrich bis zur modernen Tapete – wir verschönern Ihre Wände mit Sorgfalt und Präzision, damit Sie sich rundum wohlfühlen.</p>
     </div>
 
-    <div class="bubble slide-in" data-fullscreen-id="garten">
-      <h3>Gartenanlagen & Außenbereiche</h3>
-      <div id="garten-blase">
-        <div class="overlay"></div>
-        <div class="content">
-          <p>Gestalten Sie mit uns Ihre grüne Oase: Gartenpflege, Rollrasenverlegung, Bau von Zäunen, Pavillons und mehr. Natur erleben in perfekter Form.</p>
-        </div>
+    <div class="bubble slide-in" data-fullscreen-id="garten" id="garten-blase">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Gartenanlagen – Natur trifft Design</h3>
+        <p>Wir gestalten Ihre Außenbereiche ganz nach Ihren Vorstellungen: Beete anlegen, Rollrasen verlegen, Zäune bauen und Gartenpavillons errichten – für einen harmonischen Rückzugsort.</p>
       </div>
     </div>
 
     <div class="bubble slide-in" data-fullscreen-id="werbeanlagen">
-      <h3>Werbeanlagen & Beschilderungen</h3>
-      <p>Wir fertigen und montieren Ihre Werbeanlagen professionell und individuell – für eine überzeugende Außenwirkung.</p>
+      <h3>Werbeanlagen – Professionelle Montage und Elektronik</h3>
+      <p>
+        Wir montieren Werbeanlagen wie Werbevitrinen und Poster, z.B. in Parkhäusern, inklusive Plakatierung und der Installation von Elektronik. 
+        Dazu gehören der fachgerechte Einbau und das Anschließen von Lampen für optimale Beleuchtung.
+      </p>
     </div>
   </div>
 
   <div id="Contact" class="tabcontent">
-    <h2>Kontaktieren Sie uns</h2>
-    <p>Wir freuen uns auf Ihre Anfrage!</p>
-    <ul>
-      <li><strong>Telefon:</strong> 01234 567890</li>
-      <li><strong>E-Mail:</strong> info@abu-shagrah.de</li>
-      <li><strong>Adresse:</strong> Musterstraße 12, 12345 Musterstadt</li>
-    </ul>
+    <h2>Kontakt</h2>
+    <p>Wir freuen uns auf Ihre Nachricht!</p>
+    <p>
+      Telefon: <a href="tel:+491234567890">+49 123 4567890</a><br />
+      E-Mail: <a href="mailto:info@abu-shagrah.de">info@abu-shagrah.de</a>
+    </p>
   </div>
 
   <script>
-    const bubblesWithImages = {
-      renovierung: [
-        "bilder/renovierung/20150529_210708.jpg",
-        "bilder/renovierung/IMG_20181127_143356.jpg",
-        "bilder/renovierung/20220131_010206.jpg"
-      ],
-      trockenbau: [
-        "bilder/trockenbau/trockenbau1.jpg",
-        "bilder/trockenbau/trockenbau2.jpg"
-      ],
-      küchenmontage: [
-        "bilder/küchenmontage/kh_4.jpeg",
-        "bilder/küchenmontage/kh1.jpeg"
-      ],
-      tapezieren: [
-        "bilder/tapezieren/IMG_20181208_191937.jpg"
-      ],
-      garten: [
-        "bilder/garten/garten1.jpg",
-        "bilder/garten/garten2.jpg"
-      ],
-      werbeanlagen: [
-        "bilder/werbeanlagen/20160319_181934.jpg",
-        "bilder/werbeanlagen/20201202_183828.jpg",
-        "bilder/werbeanlagen/20161208_025358.jpg"
-      ]
-    };
-
+    // Tabnavigation
     function openPage(evt, pageName) {
-      // Tabs umschalten
       const tabcontent = document.querySelectorAll(".tabcontent");
-      tabcontent.forEach(tc => tc.classList.remove("active"));
+      tabcontent.forEach((tab) => tab.classList.remove("active"));
 
       const tablinks = document.querySelectorAll(".tablink");
-      tablinks.forEach(tl => tl.classList.remove("active"));
+      tablinks.forEach((tab) => tab.classList.remove("active"));
 
       document.getElementById(pageName).classList.add("active");
       evt.currentTarget.classList.add("active");
-
-      // Beim Seitenwechsel evtl. Vollbildbubbles schließen
-      closeFullscreenBubble();
     }
 
-    function closeFullscreenBubble() {
-      const existing = document.querySelector(".fullscreen-bubble");
-      if (existing) {
-        existing.remove();
-      }
-    }
-
-    function showFullscreenBubble(id) {
-      closeFullscreenBubble();
-
-      const images = bubblesWithImages[id] || [];
-
-      const bubble = document.createElement("div");
-      bubble.classList.add("fullscreen-bubble");
-
-      const closeBtn = document.createElement("button");
-      closeBtn.classList.add("close-btn");
-      closeBtn.textContent = "Schließen ✕";
-      closeBtn.onclick = closeFullscreenBubble;
-      bubble.appendChild(closeBtn);
-
-      let titleText = "";
-      switch(id) {
-        case "renovierung": titleText = "Renovierungsarbeiten – Frischer Wind für Ihr Zuhause"; break;
-        case "trockenbau": titleText = "Trockenbau – Flexible Raumlösungen"; break;
-        case "küchenmontage": titleText = "Küchenmontage – Perfekt eingebaut und anschlussfertig"; break;
-        case "tapezieren": titleText = "Tapezieren & Malerarbeiten"; break;
-        case "garten": titleText = "Gartenanlagen & Außenbereiche"; break;
-        case "werbeanlagen": titleText = "Werbeanlagen & Beschilderungen"; break;
-        default: titleText = "";
-      }
-
-      const h3 = document.createElement("h3");
-      h3.textContent = titleText;
-      bubble.appendChild(h3);
-
-      const ul = document.createElement("ul");
-
-      switch(id) {
-        case "renovierung":
-          ["Professionelle Sanierung von Böden, Wänden und Decken.",
-          "Entfernung alter Beläge und Vorbereitung der Untergründe.",
-          "Fachgerechte Ausführung mit hochwertigen Materialien."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-
-        case "trockenbau":
-          ["Errichtung von Raumtrennwänden.",
-          "Deckenabhängungen zur Raumgestaltung.",
-          "Verkleidungen und Dämmarbeiten."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-
-        case "küchenmontage":
-          ["Montage von Küchenschränken und Arbeitsplatten.",
-          "Anschluss von Geräten und Wasserleitungen.",
-          "Individuelle Anpassungen nach Kundenwunsch."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-
-        case "tapezieren":
-          ["Anbringung verschiedener Tapetenarten.",
-          "Vorbereitung und Glättung der Wände.",
-          "Farbliche Gestaltung und Malerarbeiten."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-
-        case "garten":
-          ["Rollrasenverlegung für grüne Flächen.",
-          "Bau von Zäunen, Pavillons und Überdachungen.",
-          "Pflege und Gestaltung von Außenanlagen."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-
-        case "werbeanlagen":
-          ["Anfertigung von individuellen Werbeanlagen.",
-          "Montage und Installation vor Ort.",
-          "Witterungsbeständige Materialien für langlebige Außenwirkung."].forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          break;
-      }
-
-      bubble.appendChild(ul);
-
-      // Bilder hinzufügen
-      images.forEach(src => {
-        const img = document.createElement("img");
-        img.src = src;
-        bubble.appendChild(img);
-      });
-
-      document.body.appendChild(bubble);
-      bubble.scrollIntoView({behavior: "smooth"});
-    }
-
-    // Eventlistener für Klicks auf Blasen
-    document.querySelectorAll(".bubble").forEach(bubble => {
-      bubble.addEventListener("click", () => {
-        const id = bubble.getAttribute("data-fullscreen-id");
-        if (id) {
-          showFullscreenBubble(id);
-        }
-      });
-    });
-
-    // Gartenblase als Sonderfall (da div im Inneren)
-    document.getElementById("garten-blase").addEventListener("click", () => {
-      showFullscreenBubble("garten");
-    });
-
-    // Tabs initial öffnen
     document.getElementById("defaultOpen").click();
 
-    // Animationen beim Scrollen
-    const slideElements = document.querySelectorAll(".slide-in");
+    // Scroll Animation
+    const slideIns = document.querySelectorAll(".slide-in");
+
     function checkSlide() {
-      slideElements.forEach(el => {
-        const slideInAt = (window.scrollY + window.innerHeight) - el.clientHeight / 2;
-        const elementBottom = el.offsetTop + el.clientHeight;
-        if (slideInAt > el.offsetTop && window.scrollY < elementBottom) {
-          el.classList.add("visible");
-        } else {
-          el.classList.remove("visible");
+      const triggerBottom = window.innerHeight * 0.9;
+
+      slideIns.forEach((slideIn) => {
+        const top = slideIn.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          slideIn.classList.add("visible");
         }
       });
     }
     window.addEventListener("scroll", checkSlide);
     checkSlide();
+
+    // Bilder und Vollbild-Funktionalität
+    const bubblesWithImages = {
+      renovierung:["20150529_210708.jpg","IMG_20181127_143356.jpg","20220131_010206.jpg"],
+      trockenbau: ["trockenbau1.jpg", "trockenbau2.jpg"],
+      küchenmontage: ["kh_4.jpeg", "kh1.jpeg"],
+      tapezieren: ["IMG_20181208_191937.jpg"],
+      garten: ["garten1.jpg", "garten2.jpg"],
+      werbeanlagen: ["20160319_181934.jpg", "20201202_183828.jpg", "20161208_025358.jpg"]
+    };
+
+    const bubbles = document.querySelectorAll(".bubble");
+
+    bubbles.forEach(bubble => {
+      // Bilder aus vorhandenen img-Tags entfernen (keine mehr drin)
+      bubble.querySelectorAll("img").forEach(img => img.remove());
+
+      const id = bubble.dataset.fullscreenId;
+      if (bubblesWithImages[id]) {
+        // Erstes Bild als Vorschau anhängen
+        const firstImg = document.createElement("img");
+        firstImg.src = bubblesWithImages[id][0];
+        firstImg.alt = `${id} Vorschau`;
+        bubble.appendChild(firstImg);
+      }
+
+      // Klick zum Öffnen Vollbild
+      bubble.addEventListener("click", () => {
+        openFullscreenBubble(id);
+      });
+    });
+
+    // Vollbild-Bubble
+    function openFullscreenBubble(id) {
+      const existing = document.querySelector(".fullscreen-bubble");
+      if (existing) existing.remove();
+
+      const bubbleDiv = document.querySelector(`.bubble[data-fullscreen-id="${id}"]`);
+      if (!bubbleDiv) return;
+
+      const fullscreen = document.createElement("div");
+      fullscreen.classList.add("fullscreen-bubble");
+
+      // Überschrift
+      const h3 = document.createElement("h3");
+      h3.textContent = bubbleDiv.querySelector("h3").textContent;
+      fullscreen.appendChild(h3);
+
+      // Alle Bilder anzeigen
+      if (bubblesWithImages[id]) {
+        bubblesWithImages[id].forEach(src => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${id} Bild`;
+          fullscreen.appendChild(img);
+        });
+      }
+
+      // Text (Paragraph + Listen) kopieren
+      // Wir kopieren nur die ersten P und UL des Originals (vereinfachte Lösung)
+      bubbleDiv.querySelectorAll("p, ul").forEach(node => {
+        fullscreen.appendChild(node.cloneNode(true));
+      });
+
+      // Schließen-Button
+      const closeBtn = document.createElement("button");
+      closeBtn.textContent = "Schließen ✖";
+      closeBtn.classList.add("close-btn");
+      closeBtn.addEventListener("click", () => {
+        fullscreen.remove();
+      });
+
+      fullscreen.appendChild(closeBtn);
+      document.body.appendChild(fullscreen);
+      // Scroll to top
+      fullscreen.scrollTop = 0;
+    }
   </script>
 </body>
 </html>
