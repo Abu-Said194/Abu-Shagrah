@@ -113,6 +113,32 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Neue Styles für Gartengestaltung-Blase mit Hintergrundbild und Overlay */
+    #garten-blase {
+      position: relative;
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      overflow: hidden;
+      background: url('IMG-20200503-WA0004.jpg') center center / cover no-repeat;
+    }
+
+    #garten-blase > .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      z-index: 0;
+    }
+
+    #garten-blase > .content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -177,15 +203,19 @@
       <p>Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.</p>
     </div>
 
-    <div class="bubble slide-in">
-      <h3>Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen</h3>
-      <p>Wir gestalten Ihren Garten nach Maß, mit funktionalen und stilvollen Elementen:</p>
-      <ul>
-        <li>Pavillons mit natürlichem Dach, z.B. Weinranken</li>
-        <li>Stabile und langlebige Zäune als Sichtschutz und Rahmen</li>
-        <li>Fahrradständer mit wettergeschützter Überdachung</li>
-        <li>Professioneller Bodenausgleich und Rollrasen für ein sattes Grün</li>
-      </ul>
+    <!-- Gartengestaltung mit Hintergrundbild und Overlay -->
+    <div id="garten-blase" class="slide-in">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen</h3>
+        <p>Wir gestalten Ihren Garten nach Maß, mit funktionalen und stilvollen Elementen:</p>
+        <ul>
+          <li>Pavillons mit natürlichem Dach, z.B. Weinranken</li>
+          <li>Stabile und langlebige Zäune als Sichtschutz und Rahmen</li>
+          <li>Fahrradständer mit wettergeschützter Überdachung</li>
+          <li>Professioneller Bodenausgleich und Rollrasen für ein sattes Grün</li>
+        </ul>
+      </div>
     </div>
   </div>
 
