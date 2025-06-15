@@ -165,41 +165,51 @@
       height: 100vh;
       background: white;
       padding: 2rem;
-      overflow-y: auto;
       box-shadow: none;
       z-index: 9999;
       border-radius: 0;
-      transform: none;
-      transition: none;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     .fullscreen-bubble h3 {
       margin-top: 0;
+      flex-shrink: 0;
     }
 
-    /* Horizontal scrollbarer Container für Vollbildbilder */
-    .fullscreen-images-container {
-      display: flex;
+    .fullscreen-bubble .image-scroll-container {
+      flex-grow: 1;
       overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: row-reverse; /* Blase von rechts nach links scrollen */
       gap: 1rem;
       padding-bottom: 1rem;
       scroll-behavior: smooth;
-      direction: rtl; /* Für Scrollen von rechts nach links */
     }
 
-    .fullscreen-images-container img {
-      flex: 0 0 auto;
-      width: 300px;
+    .fullscreen-bubble .image-scroll-container img {
+      height: 80vh;
       border-radius: 8px;
+      flex-shrink: 0;
+      cursor: grab;
+      user-select: none;
       object-fit: contain;
-      direction: ltr; /* Bilder normal ausrichten */
+    }
+
+    .fullscreen-bubble .content-text {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 1rem;
+      padding-right: 1rem;
+      border-top: 1px solid #ccc;
+      flex-shrink: 0;
     }
 
     .fullscreen-bubble ul {
-      max-width: none;
       padding-left: 1.5rem;
+      margin: 0.5rem 0;
     }
 
     .fullscreen-bubble .close-btn {
@@ -269,135 +279,153 @@
 
     <div class="bubble slide-in" data-fullscreen-id="küchenmontage">
       <h3>Küchenmontage – Perfekt eingebaut und anschlussfertig</h3>
-      <p>Ob Neuküche oder Umbau – wir montieren Ihre Küchenmöbel sicher, exakt und auf Wunsch auch mit Anschlussarbeiten für Elektro und Wasser.</p>
+      <p>Ob Neuküche oder Umgestaltung: Wir montieren Küchen fachgerecht und stellen sicher, dass alles passt und funktioniert.</p>
     </div>
 
-    <div class="bubble slide-in" data-fullscreen-id="gartenbau" id="garten-blase">
-      <div class="overlay"></div>
-      <div class="content">
-        <h3>Garten- & Landschaftsbau – Ihr grünes Paradies</h3>
-        <p>Wir gestalten Ihren Garten individuell und professionell. Von der Anlage über Rollrasen bis zu Pflasterarbeiten bringen wir Ihre Außenanlagen zum Strahlen.</p>
-      </div>
+    <div class="bubble slide-in" data-fullscreen-id="werbeanlagen">
+      <h3>Werbeanlagen & Beschriftungen</h3>
+      <p>Professionelle Montage und Wartung von Werbeanlagen, Leuchtschildern und Fahrzeugbeschriftungen. Wir sorgen dafür, dass Ihr Unternehmen ins rechte Licht gerückt wird.</p>
+      <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg" alt="Werbeanlagen Montage" />
     </div>
   </div>
 
-  <div id="Contact" class="tabcontent slide-in">
-    <h2>Kontaktieren Sie uns</h2>
-    <p>Telefon: <a href="tel:+49123456789">+49 123 456 789</a></p>
-    <p>Email: <a href="mailto:info@abu-shagrah.de">info@abu-shagrah.de</a></p>
-    <p>Adresse: Musterstraße 12, 12345 Musterstadt</p>
+  <div id="Contact" class="tabcontent">
+    <h1 class="slide-in">Kontaktieren Sie uns</h1>
+    <p class="slide-in">Wir sind gerne für Sie da! Rufen Sie uns an oder schreiben Sie uns eine Nachricht.</p>
+    <ul class="slide-in">
+      <li><strong>Telefon:</strong> 01234 567890</li>
+      <li><strong>E-Mail:</strong> info@abu-shagrah.de</li>
+      <li><strong>Adresse:</strong> Musterstraße 1, 12345 Musterstadt</li>
+    </ul>
+  </div>
+
+  <!-- Vollbild-Blasen-Container -->
+  <div id="fullscreenBubble" class="fullscreen-bubble" style="display:none;">
+    <button class="close-btn" onclick="closeFullscreenBubble()">✕ Schließen</button>
+    <h3 id="fullscreenTitle"></h3>
+    <div class="image-scroll-container" id="imageScrollContainer"></div>
+    <div class="content-text" id="fullscreenContent"></div>
   </div>
 
   <script>
-    // Tab-Navigation
+    // Tab-Funktion
     function openPage(evt, pageName) {
-      document.querySelectorAll(".tabcontent").forEach(tc => {
-        tc.classList.remove("active");
-      });
-      document.querySelectorAll(".tablink").forEach(tab => {
-        tab.classList.remove("active");
-      });
-      document.getElementById(pageName).classList.add("active");
-      evt.currentTarget.classList.add("active");
-    }
-    document.getElementById("defaultOpen").click();
+      const tabcontent = document.querySelectorAll('.tabcontent');
+      tabcontent.forEach(tc => tc.classList.remove('active'));
+      document.getElementById(pageName).classList.add('active');
 
-    // Slide-in animation beim Scrollen
-    function handleScroll() {
-      document.querySelectorAll(".slide-in").forEach(el => {
+      const tablinks = document.querySelectorAll('.tablink');
+      tablinks.forEach(tl => tl.classList.remove('active'));
+      evt.currentTarget.classList.add('active');
+    }
+    document.getElementById('defaultOpen').click();
+
+    // Scroll-Animationen für Elemente mit slide-in
+    function onScroll() {
+      const slideIns = document.querySelectorAll('.slide-in');
+      const triggerBottom = window.innerHeight * 0.85;
+      slideIns.forEach(el => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add("visible");
+        if (rect.top < triggerBottom) {
+          el.classList.add('visible');
         }
       });
     }
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", handleScroll);
+    window.addEventListener('scroll', onScroll);
+    onScroll();
 
-    // Daten der Bilder für die Vollbildansicht
-    const bubblesWithImages = {
-      renovierung: [
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149137/abushagrah/IMG_20201023_135829_jyq3dn.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149138/abushagrah/IMG_20201023_135843_c3rj7o.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149138/abushagrah/IMG_20201023_135903_c7yro3.jpg"
-      ],
-      trockenbau: [
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201112_100927_czx9ko.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201112_100939_kshm2g.jpg"
-      ],
-      küchenmontage: [
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201017_113619_dptco2.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201017_113643_wz7xsf.jpg"
-      ],
-      gartenbau: [
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG_20200503_134326_bu0pcf.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG-20200503-WA0004_ghzzos.jpg",
-        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG-20200503-WA0005_tl1yi9.jpg"
-      ]
+    // Daten für Vollbildblasen (je nach Bubble)
+    const bubbleData = {
+      renovierung: {
+        title: 'Renovierungsarbeiten – Frischer Wind für Ihr Zuhause',
+        images: [
+          'https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg',
+          'https://cdn.pixabay.com/photo/2016/11/22/19/32/construction-1857173_1280.jpg'
+        ],
+        content: `
+          <p>Wir renovieren fachgerecht, termintreu und mit viel Liebe zum Detail.</p>
+          <ul>
+            <li>Böden verlegen</li>
+            <li>Wände streichen und tapezieren</li>
+            <li>Sanitärarbeiten</li>
+          </ul>`
+      },
+      trockenbau: {
+        title: 'Trockenbau – Flexible Raumlösungen',
+        images: [
+          'https://cdn.pixabay.com/photo/2018/06/10/23/54/room-3466465_1280.jpg',
+          'https://cdn.pixabay.com/photo/2016/11/29/12/54/construction-1866839_1280.jpg'
+        ],
+        content: `
+          <p>Trennwände, Deckenabhängungen oder Verkleidungen.</p>
+          <ul>
+            <li>Schnelle Montage</li>
+            <li>Optimale Schalldämmung</li>
+            <li>Flexible Gestaltung</li>
+          </ul>`
+      },
+      küchenmontage: {
+        title: 'Küchenmontage – Perfekt eingebaut und anschlussfertig',
+        images: [
+          'https://cdn.pixabay.com/photo/2017/06/20/15/19/kitchen-2425127_1280.jpg',
+          'https://cdn.pixabay.com/photo/2016/11/29/12/39/kitchen-1866333_1280.jpg'
+        ],
+        content: `
+          <p>Fachgerechte Montage von Küchen aller Art.</p>
+          <ul>
+            <li>Maßgeschneiderte Lösungen</li>
+            <li>Alle Anschlüsse geprüft</li>
+            <li>Schnelle Umsetzung</li>
+          </ul>`
+      },
+      werbeanlagen: {
+        title: 'Werbeanlagen & Beschriftungen',
+        images: [
+          'https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg'
+        ],
+        content: `
+          <p>Professionelle Montage und Wartung von Werbeanlagen, Leuchtschildern und Fahrzeugbeschriftungen.</p>
+          <ul>
+            <li>Leuchtschilder</li>
+            <li>Fahrzeugbeschriftungen</li>
+            <li>Außenwerbung</li>
+          </ul>`
+      }
     };
 
-    // Vollbild-Bubble öffnen
+    // Klick auf Bubble öffnet Vollbild-Blase mit Bildern
+    document.querySelectorAll('.bubble').forEach(bubble => {
+      bubble.addEventListener('click', () => {
+        const id = bubble.getAttribute('data-fullscreen-id');
+        if (bubbleData[id]) {
+          openFullscreenBubble(id);
+        }
+      });
+    });
+
     function openFullscreenBubble(id) {
-      // Vorhandene entfernen
-      const existing = document.querySelector(".fullscreen-bubble");
-      if (existing) existing.remove();
+      const data = bubbleData[id];
+      document.getElementById('fullscreenTitle').innerText = data.title;
 
-      const bubbleDiv = document.querySelector(`.bubble[data-fullscreen-id="${id}"]`);
-      if (!bubbleDiv) return;
-
-      const fullscreen = document.createElement("div");
-      fullscreen.classList.add("fullscreen-bubble");
-
-      // Überschrift
-      const h3 = document.createElement("h3");
-      h3.textContent = bubbleDiv.querySelector("h3").textContent;
-      fullscreen.appendChild(h3);
-
-      // Bilder horizontal scrollbar von rechts nach links
-      if (bubblesWithImages[id]) {
-        const imagesContainer = document.createElement("div");
-        imagesContainer.classList.add("fullscreen-images-container");
-
-        bubblesWithImages[id].forEach(src => {
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = `${id} Bild`;
-          imagesContainer.appendChild(img);
-        });
-
-        fullscreen.appendChild(imagesContainer);
-      }
-
-      // Text (p und ul) kopieren
-      bubbleDiv.querySelectorAll("p, ul").forEach(node => {
-        fullscreen.appendChild(node.cloneNode(true));
+      const scrollContainer = document.getElementById('imageScrollContainer');
+      scrollContainer.innerHTML = '';
+      data.images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = data.title;
+        scrollContainer.appendChild(img);
       });
 
-      // Schließen-Button
-      const closeBtn = document.createElement("button");
-      closeBtn.textContent = "Schließen ✖";
-      closeBtn.classList.add("close-btn");
-      closeBtn.addEventListener("click", () => {
-        fullscreen.remove();
-      });
-      fullscreen.appendChild(closeBtn);
-
-      document.body.appendChild(fullscreen);
-      fullscreen.scrollTop = 0;
+      document.getElementById('fullscreenContent').innerHTML = data.content;
+      document.getElementById('fullscreenBubble').style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Scroll auf Body verhindern
     }
 
-    // Klick-Handler für Bubbles
-    document.querySelectorAll(".bubble").forEach(bubble => {
-      bubble.addEventListener("click", () => {
-        const id = bubble.dataset.fullscreenId;
-        if (id) openFullscreenBubble(id);
-      });
-    });
-
-    // Besonderer Klick für garten-blase (mit Hintergrundbild)
-    document.getElementById("garten-blase").addEventListener("click", () => {
-      openFullscreenBubble("gartenbau");
-    });
+    function closeFullscreenBubble() {
+      document.getElementById('fullscreenBubble').style.display = 'none';
+      document.body.style.overflow = ''; // Scroll wieder erlauben
+    }
   </script>
 </body>
 </html>
+
