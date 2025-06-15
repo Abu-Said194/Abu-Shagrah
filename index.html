@@ -102,6 +102,11 @@
       padding: 1.2rem 1.5rem;
       margin: 1.2rem 0;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer; /* Klickbar machen */
+      transition: box-shadow 0.3s;
+    }
+    .bubble:hover {
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
     }
 
     a {
@@ -120,6 +125,11 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       overflow: hidden;
       background: url('IMG-20200503-WA0004.jpg') center center / cover no-repeat;
+      cursor: pointer; /* Klickbar machen */
+      transition: box-shadow 0.3s;
+    }
+    #garten-blase:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
     }
 
     #garten-blase > .overlay {
@@ -136,6 +146,37 @@
       max-width: 700px;
       margin: 0 auto;
     }
+
+    /* Vollbild-Modus für Blasen */
+    .bubble.fullscreen, #garten-blase.fullscreen {
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 90vw !important;
+      height: 90vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      transform: translate(-50%, -50%) !important;
+      z-index: 2000 !important;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
+      background: white !important;
+      color: #222 !important;
+      overflow: auto !important;
+      border-radius: 12px !important;
+      transition: all 0.4s ease-in-out !important;
+      cursor: default !important;
+      padding: 2rem !important;
+    }
+
+    /* Optional: Scrollbar in fullscreen scrollbar sichtbar machen */
+    .bubble.fullscreen::-webkit-scrollbar, #garten-blase.fullscreen::-webkit-scrollbar {
+      width: 10px;
+    }
+    .bubble.fullscreen::-webkit-scrollbar-thumb, #garten-blase.fullscreen::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -191,6 +232,8 @@
     <div class="bubble slide-in">
       <h3>Küchenmontage – Perfekt eingebaut und anschlussfertig</h3>
       <p>Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.</p>
+       <img src="kh_4.jpg" alt="Küchenmontage Beispiel 1" style="width:100%; border-radius:8px; margin:0.5rem 0;" />
+       <img src="kh1.jpg" alt="Küchenmontage Beispiel 2" style="width:100%; border-radius:8px; margin:0.5rem 0;" />
     </div>
 
     <div class="bubble slide-in">
@@ -255,6 +298,44 @@
     }
     window.addEventListener('scroll', checkSlide);
     window.addEventListener('load', checkSlide);
+
+    // Vollbild Blase ein/aus
+    function toggleFullscreenBubble(el) {
+      if (el.classList.contains('fullscreen')) {
+        el.classList.remove('fullscreen');
+      } else {
+        // Zuerst alle anderen schließen
+        document.querySelectorAll('.bubble.fullscreen, #garten-blase.fullscreen').forEach(b => b.classList.remove('fullscreen'));
+        el.classList.add('fullscreen');
+      }
+    }
+
+    // Klick auf Bubble oder garten-blase öffnet Vollbild
+    document.querySelectorAll('.bubble, #garten-blase').forEach(el => {
+      el.addEventListener('click', e => {
+        // Verhindern, falls man in fullscreen ist, nochmal zu schließen, wenn man klickt auf Link etc
+        if (!el.classList.contains('fullscreen')) {
+          toggleFullscreenBubble(el);
+        }
+      });
+    });
+
+    // Klick außerhalb schließt Vollbild
+    document.addEventListener('click', e => {
+      const fullscreenBubble = document.querySelector('.bubble.fullscreen, #garten-blase.fullscreen');
+      if (fullscreenBubble && !fullscreenBubble.contains(e.target)) {
+        fullscreenBubble.classList.remove('fullscreen');
+      }
+    });
+
+    // ESC schließt Vollbild
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape") {
+        document.querySelectorAll('.bubble.fullscreen, #garten-blase.fullscreen').forEach(el => el.classList.remove('fullscreen'));
+      }
+    });
   </script>
 </body>
 </html>
+
+
