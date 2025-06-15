@@ -102,11 +102,11 @@
       padding: 1.2rem 1.5rem;
       margin: 1.2rem 0;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      cursor: pointer; /* Klickbar machen */
-      transition: box-shadow 0.3s;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
     }
     .bubble:hover {
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
 
     a {
@@ -125,8 +125,8 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       overflow: hidden;
       background: url('IMG-20200503-WA0004.jpg') center center / cover no-repeat;
-      cursor: pointer; /* Klickbar machen */
-      transition: box-shadow 0.3s;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
     }
     #garten-blase:hover {
       box-shadow: 0 6px 20px rgba(0,0,0,0.7);
@@ -147,36 +147,54 @@
       margin: 0 auto;
     }
 
-    /* Vollbild-Modus für Blasen */
-    .bubble.fullscreen, #garten-blase.fullscreen {
-      position: fixed !important;
-      top: 50% !important;
-      left: 50% !important;
-      width: 90vw !important;
-      height: 90vh !important;
-      max-width: none !important;
-      max-height: none !important;
-      transform: translate(-50%, -50%) !important;
-      z-index: 2000 !important;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
-      background: white !important;
-      color: #222 !important;
-      overflow: auto !important;
-      border-radius: 12px !important;
-      transition: all 0.4s ease-in-out !important;
-      cursor: default !important;
-      padding: 2rem !important;
+    /* Vollbild-Blase */
+    .fullscreen-bubble {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      padding: 2rem;
+      overflow-y: auto;
+      box-shadow: none;
+      z-index: 9999;
+      border-radius: 0;
+      transform: none;
+      transition: none;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Optional: Scrollbar in fullscreen scrollbar sichtbar machen */
-    .bubble.fullscreen::-webkit-scrollbar, #garten-blase.fullscreen::-webkit-scrollbar {
-      width: 10px;
-    }
-    .bubble.fullscreen::-webkit-scrollbar-thumb, #garten-blase.fullscreen::-webkit-scrollbar-thumb {
-      background-color: rgba(0,0,0,0.2);
-      border-radius: 10px;
+    .fullscreen-bubble h3 {
+      margin-top: 0;
     }
 
+    .fullscreen-bubble img {
+      width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+      max-width: none;
+    }
+
+    .fullscreen-bubble ul {
+      max-width: none;
+      padding-left: 1.5rem;
+    }
+
+    .fullscreen-bubble .close-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #008f8f;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10000;
+    }
   </style>
 </head>
 <body>
@@ -219,30 +237,30 @@
   </div>
 
   <div id="Dienstleistungen" class="tabcontent">
-    <div class="bubble slide-in">
+    <div class="bubble slide-in" data-fullscreen-id="renovierung">
       <h3>Renovierungsarbeiten – Frischer Wind für Ihr Zuhause</h3>
       <p>Ob einzelne Räume oder komplette Sanierungen: Wir renovieren fachgerecht, termintreu und mit viel Liebe zum Detail. Von Boden bis Decke – wir schaffen Wohnqualität, die begeistert.</p>
     </div>
 
-    <div class="bubble slide-in">
+    <div class="bubble slide-in" data-fullscreen-id="trockenbau">
       <h3>Trockenbau – Flexible Raumlösungen</h3>
       <p>Trennwände, Deckenabhängungen oder Verkleidungen – wir setzen Ihre Wünsche im Trockenbau passgenau um und sorgen für funktionale und optisch ansprechende Ergebnisse.</p>
     </div>
 
-    <div class="bubble slide-in">
+    <div class="bubble slide-in" data-fullscreen-id="küchenmontage">
       <h3>Küchenmontage – Perfekt eingebaut und anschlussfertig</h3>
       <p>Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.</p>
-       <img src="kh_4.jpg" alt="Küchenmontage Beispiel 1" style="width:100%; border-radius:8px; margin:0.5rem 0;" />
-       <img src="kh1.jpg" alt="Küchenmontage Beispiel 2" style="width:100%; border-radius:8px; margin:0.5rem 0;" />
+      <img src="kh_4.jpeg" alt="Küchenmontage Beispiel 1" />
+      <img src="kh1.jpeg" alt="Küchenmontage Beispiel 2" />
     </div>
 
-    <div class="bubble slide-in">
+    <div class="bubble slide-in" data-fullscreen-id="tapezieren">
       <h3>Tapezierarbeiten – Stilvolle Wände für mehr Wohlfühlatmosphäre</h3>
       <p>Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.</p>
-      <img src="IMG_20181208_191937.jpg" alt="Tapezierarbeit Beispiel" style="width:100%; border-radius:8px; margin-top:10px;" />
+      <img src="IMG_20181208_191937.jpg" alt="Tapezierarbeit Beispiel" />
     </div>
 
-    <div id="garten-blase" class="slide-in">
+    <div id="garten-blase" class="slide-in" data-fullscreen-id="garten">
       <div class="overlay"></div>
       <div class="content">
         <h3>Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen</h3>
@@ -299,43 +317,43 @@
     window.addEventListener('scroll', checkSlide);
     window.addEventListener('load', checkSlide);
 
-    // Vollbild Blase ein/aus
-    function toggleFullscreenBubble(el) {
-      if (el.classList.contains('fullscreen')) {
-        el.classList.remove('fullscreen');
-      } else {
-        // Zuerst alle anderen schließen
-        document.querySelectorAll('.bubble.fullscreen, #garten-blase.fullscreen').forEach(b => b.classList.remove('fullscreen'));
-        el.classList.add('fullscreen');
-      }
-    }
+    // Vollbild-Bubble Logik
+    const dienstleistungsContainer = document.getElementById('Dienstleistungen');
 
-    // Klick auf Bubble oder garten-blase öffnet Vollbild
-    document.querySelectorAll('.bubble, #garten-blase').forEach(el => {
-      el.addEventListener('click', e => {
-        // Verhindern, falls man in fullscreen ist, nochmal zu schließen, wenn man klickt auf Link etc
-        if (!el.classList.contains('fullscreen')) {
-          toggleFullscreenBubble(el);
-        }
+    dienstleistungsContainer.addEventListener('click', function(event) {
+      // Finde, ob eine Bubble (oder Garten-Blase) geklickt wurde
+      let target = event.target;
+      while (target && !target.classList.contains('bubble') && target.id !== 'garten-blase') {
+        target = target.parentElement;
+      }
+      if (!target) return;
+
+      // Erstelle Vollbild-Blase
+      const fullscreen = document.createElement('div');
+      fullscreen.classList.add('fullscreen-bubble');
+
+      // Close Button
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = 'Zurück';
+      closeBtn.classList.add('close-btn');
+      closeBtn.addEventListener('click', () => {
+        fullscreen.remove();
       });
-    });
+      fullscreen.appendChild(closeBtn);
 
-    // Klick außerhalb schließt Vollbild
-    document.addEventListener('click', e => {
-      const fullscreenBubble = document.querySelector('.bubble.fullscreen, #garten-blase.fullscreen');
-      if (fullscreenBubble && !fullscreenBubble.contains(e.target)) {
-        fullscreenBubble.classList.remove('fullscreen');
-      }
-    });
+      // Inhalt der Blase klonen und reinpacken (ohne Close Button)
+      let contentClone = target.cloneNode(true);
+      contentClone.style.cursor = 'default'; // keine Hand mehr
+      contentClone.classList.remove('bubble');
+      contentClone.classList.remove('slide-in');
+      contentClone.querySelectorAll('.close-btn').forEach(el => el.remove()); // evtl. alte Close-Buttons entfernen
 
-    // ESC schließt Vollbild
-    document.addEventListener('keydown', e => {
-      if (e.key === "Escape") {
-        document.querySelectorAll('.bubble.fullscreen, #garten-blase.fullscreen').forEach(el => el.classList.remove('fullscreen'));
-      }
+      fullscreen.appendChild(contentClone);
+      document.body.appendChild(fullscreen);
+
+      // Scroll nach oben der Vollbild-Blase
+      fullscreen.scrollTop = 0;
     });
   </script>
 </body>
 </html>
-
-
