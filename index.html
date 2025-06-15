@@ -157,74 +157,84 @@
     }
 
     /* Vollbild-Blase */
-    .fullscreen-bubble {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: white;
-      padding: 2rem;
-      box-shadow: none;
-      z-index: 9999;
-      border-radius: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+.fullscreen-bubble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;      /* Etwas kleiner als Vollbild */
+  height: 80vh;     /* Hoch genug */
+  background: white;
+  padding: 2rem;
+  overflow: hidden; /* Verhindert Scrollen am Container */
+  box-shadow: none;
+  z-index: 9999;
+  border-radius: 8px;
+  display: flex;    /* WICHTIG: Bilder und Text nebeneinander */
+  gap: 2rem;
+}
 
-    .fullscreen-bubble h3 {
-      margin-top: 0;
-      flex-shrink: 0;
-    }
+.fullscreen-bubble .images-container {
+  flex: 1;          /* Bilder nehmen z.B. 40% */
+  overflow-y: auto; /* Scrollbar für Bilder, falls zu viele */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    .fullscreen-bubble .image-scroll-container {
-      flex-grow: 1;
-      overflow-x: auto;
-      overflow-y: hidden;
-      display: flex;
-      flex-direction: row-reverse; /* Blase von rechts nach links scrollen */
-      gap: 1rem;
-      padding-bottom: 1rem;
-      scroll-behavior: smooth;
-    }
+.fullscreen-bubble .images-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
-    .fullscreen-bubble .image-scroll-container img {
-      height: 80vh;
-      border-radius: 8px;
-      flex-shrink: 0;
-      cursor: grab;
-      user-select: none;
-      object-fit: contain;
-    }
+.fullscreen-bubble .text-container {
+  flex: 1.2;        /* Text nimmt z.B. 60% */
+  overflow-y: auto; /* Scrollbar für Text */
+  max-height: 100%;
+}
 
-    .fullscreen-bubble .content-text {
-      max-height: 200px;
-      overflow-y: auto;
-      margin-top: 1rem;
-      padding-right: 1rem;
-      border-top: 1px solid #ccc;
-      flex-shrink: 0;
-    }
+.fullscreen-bubble h3 {
+  margin-top: 0;
+}
 
-    .fullscreen-bubble ul {
-      padding-left: 1.5rem;
-      margin: 0.5rem 0;
-    }
+.fullscreen-bubble ul {
+  padding-left: 1.5rem;
+  max-width: none;
+}
 
-    .fullscreen-bubble .close-btn {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #008f8f;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 10000;
-    }
+.fullscreen-bubble .close-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #008f8f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10000;
+}
+    footer {
+  background-color: #1d3939;
+  color: white;
+  text-align: center;
+  padding: 1rem 1rem;
+  font-size: 14px;
+  margin-top: 2rem;
+}
+
+footer a {
+  color: #00bfbf;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #008f8f;
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
@@ -279,153 +289,163 @@
 
     <div class="bubble slide-in" data-fullscreen-id="küchenmontage">
       <h3>Küchenmontage – Perfekt eingebaut und anschlussfertig</h3>
-      <p>Ob Neuküche oder Umgestaltung: Wir montieren Küchen fachgerecht und stellen sicher, dass alles passt und funktioniert.</p>
+      <p>Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.</p>
+    </div>
+
+    <div class="bubble slide-in" data-fullscreen-id="tapezieren">
+      <h3>Tapezieren – Kreative Wandgestaltung</h3>
+      <p>Vom klassischen Anstrich bis zur modernen Tapete – wir verschönern Ihre Wände mit Sorgfalt und Präzision, damit Sie sich rundum wohlfühlen.</p>
+    </div>
+
+    <div class="bubble slide-in" data-fullscreen-id="garten" id="garten-blase">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Gartenanlagen – Natur trifft Design</h3>
+        <p>Wir gestalten Ihre Außenbereiche ganz nach Ihren Vorstellungen: Beete anlegen, Rollrasen verlegen, Zäune bauen und Gartenpavillons errichten – für einen harmonischen Rückzugsort.</p>
+      </div>
     </div>
 
     <div class="bubble slide-in" data-fullscreen-id="werbeanlagen">
-      <h3>Werbeanlagen & Beschriftungen</h3>
-      <p>Professionelle Montage und Wartung von Werbeanlagen, Leuchtschildern und Fahrzeugbeschriftungen. Wir sorgen dafür, dass Ihr Unternehmen ins rechte Licht gerückt wird.</p>
-      <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg" alt="Werbeanlagen Montage" />
+      <h3>Werbeanlagen – Professionelle Montage und Elektronik</h3>
+      <p>
+        Wir montieren Werbeanlagen wie Werbevitrinen und Poster, z.B. in Parkhäusern, inklusive Plakatierung und der Installation von Elektronik. 
+        Dazu gehören der fachgerechte Einbau und das Anschließen von Lampen für optimale Beleuchtung.
+      </p>
     </div>
   </div>
 
   <div id="Contact" class="tabcontent">
-    <h1 class="slide-in">Kontaktieren Sie uns</h1>
-    <p class="slide-in">Wir sind gerne für Sie da! Rufen Sie uns an oder schreiben Sie uns eine Nachricht.</p>
-    <ul class="slide-in">
-      <li><strong>Telefon:</strong> 01234 567890</li>
-      <li><strong>E-Mail:</strong> info@abu-shagrah.de</li>
-      <li><strong>Adresse:</strong> Musterstraße 1, 12345 Musterstadt</li>
-    </ul>
-  </div>
-
-  <!-- Vollbild-Blasen-Container -->
-  <div id="fullscreenBubble" class="fullscreen-bubble" style="display:none;">
-    <button class="close-btn" onclick="closeFullscreenBubble()">✕ Schließen</button>
-    <h3 id="fullscreenTitle"></h3>
-    <div class="image-scroll-container" id="imageScrollContainer"></div>
-    <div class="content-text" id="fullscreenContent"></div>
+    <h2>Kontakt</h2>
+    <p>Wir freuen uns auf Ihre Nachricht!</p>
+   <p><i class="fa-solid fa-phone fa-shake"></i> +49 173 8401400</p>
+  <p><i class="fa-solid fa-envelope fa-bounce"></i> abu-shagrah@web.de</p>
   </div>
 
   <script>
-    // Tab-Funktion
+    // Tabnavigation
     function openPage(evt, pageName) {
-      const tabcontent = document.querySelectorAll('.tabcontent');
-      tabcontent.forEach(tc => tc.classList.remove('active'));
-      document.getElementById(pageName).classList.add('active');
+      const tabcontent = document.querySelectorAll(".tabcontent");
+      tabcontent.forEach((tab) => tab.classList.remove("active"));
 
-      const tablinks = document.querySelectorAll('.tablink');
-      tablinks.forEach(tl => tl.classList.remove('active'));
-      evt.currentTarget.classList.add('active');
+      const tablinks = document.querySelectorAll(".tablink");
+      tablinks.forEach((tab) => tab.classList.remove("active"));
+
+      document.getElementById(pageName).classList.add("active");
+      evt.currentTarget.classList.add("active");
     }
-    document.getElementById('defaultOpen').click();
 
-    // Scroll-Animationen für Elemente mit slide-in
-    function onScroll() {
-      const slideIns = document.querySelectorAll('.slide-in');
-      const triggerBottom = window.innerHeight * 0.85;
-      slideIns.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < triggerBottom) {
-          el.classList.add('visible');
+    document.getElementById("defaultOpen").click();
+
+    // Scroll Animation
+    const slideIns = document.querySelectorAll(".slide-in");
+
+    function checkSlide() {
+      const triggerBottom = window.innerHeight * 0.9;
+
+      slideIns.forEach((slideIn) => {
+        const top = slideIn.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          slideIn.classList.add("visible");
         }
       });
     }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
+    window.addEventListener("scroll", checkSlide);
+    checkSlide();
 
-    // Daten für Vollbildblasen (je nach Bubble)
-    const bubbleData = {
-      renovierung: {
-        title: 'Renovierungsarbeiten – Frischer Wind für Ihr Zuhause',
-        images: [
-          'https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg',
-          'https://cdn.pixabay.com/photo/2016/11/22/19/32/construction-1857173_1280.jpg'
-        ],
-        content: `
-          <p>Wir renovieren fachgerecht, termintreu und mit viel Liebe zum Detail.</p>
-          <ul>
-            <li>Böden verlegen</li>
-            <li>Wände streichen und tapezieren</li>
-            <li>Sanitärarbeiten</li>
-          </ul>`
-      },
-      trockenbau: {
-        title: 'Trockenbau – Flexible Raumlösungen',
-        images: [
-          'https://cdn.pixabay.com/photo/2018/06/10/23/54/room-3466465_1280.jpg',
-          'https://cdn.pixabay.com/photo/2016/11/29/12/54/construction-1866839_1280.jpg'
-        ],
-        content: `
-          <p>Trennwände, Deckenabhängungen oder Verkleidungen.</p>
-          <ul>
-            <li>Schnelle Montage</li>
-            <li>Optimale Schalldämmung</li>
-            <li>Flexible Gestaltung</li>
-          </ul>`
-      },
-      küchenmontage: {
-        title: 'Küchenmontage – Perfekt eingebaut und anschlussfertig',
-        images: [
-          'https://cdn.pixabay.com/photo/2017/06/20/15/19/kitchen-2425127_1280.jpg',
-          'https://cdn.pixabay.com/photo/2016/11/29/12/39/kitchen-1866333_1280.jpg'
-        ],
-        content: `
-          <p>Fachgerechte Montage von Küchen aller Art.</p>
-          <ul>
-            <li>Maßgeschneiderte Lösungen</li>
-            <li>Alle Anschlüsse geprüft</li>
-            <li>Schnelle Umsetzung</li>
-          </ul>`
-      },
-      werbeanlagen: {
-        title: 'Werbeanlagen & Beschriftungen',
-        images: [
-          'https://cdn.pixabay.com/photo/2017/08/02/01/01/construction-2563129_1280.jpg'
-        ],
-        content: `
-          <p>Professionelle Montage und Wartung von Werbeanlagen, Leuchtschildern und Fahrzeugbeschriftungen.</p>
-          <ul>
-            <li>Leuchtschilder</li>
-            <li>Fahrzeugbeschriftungen</li>
-            <li>Außenwerbung</li>
-          </ul>`
-      }
+    // Bilder und Vollbild-Funktionalität
+    const bubblesWithImages = {
+      renovierung:["20150529_210708.jpg","IMG_20181127_143356.jpg","20220131_010206.jpg"],
+      trockenbau: ["trockenbau1.jpg", "trockenbau2.jpg"],
+      küchenmontage: ["kh_4.jpeg", "kh1.jpeg"],
+      tapezieren: ["IMG_20181208_191937.jpg"],
+      garten: ["garten1.jpg", "garten2.jpg"],
+      werbeanlagen: ["20160319_181934.jpg", "20201202_183828.jpg", "20161208_025358.jpg"]
     };
 
-    // Klick auf Bubble öffnet Vollbild-Blase mit Bildern
-    document.querySelectorAll('.bubble').forEach(bubble => {
-      bubble.addEventListener('click', () => {
-        const id = bubble.getAttribute('data-fullscreen-id');
-        if (bubbleData[id]) {
-          openFullscreenBubble(id);
-        }
+    const bubbles = document.querySelectorAll(".bubble");
+
+    bubbles.forEach(bubble => {
+      // Bilder aus vorhandenen img-Tags entfernen (keine mehr drin)
+      bubble.querySelectorAll("img").forEach(img => img.remove());
+
+      const id = bubble.dataset.fullscreenId;
+      if (bubblesWithImages[id]) {
+        // Erstes Bild als Vorschau anhängen
+        const firstImg = document.createElement("img");
+        firstImg.src = bubblesWithImages[id][0];
+        firstImg.alt = `${id} Vorschau`;
+        bubble.appendChild(firstImg);
+      }
+
+      // Klick zum Öffnen Vollbild
+      bubble.addEventListener("click", () => {
+        openFullscreenBubble(id);
       });
     });
 
-    function openFullscreenBubble(id) {
-      const data = bubbleData[id];
-      document.getElementById('fullscreenTitle').innerText = data.title;
+    // Vollbild-Bubble
+function openFullscreenBubble(id) {
+  const existing = document.querySelector(".fullscreen-bubble");
+  if (existing) existing.remove();
 
-      const scrollContainer = document.getElementById('imageScrollContainer');
-      scrollContainer.innerHTML = '';
-      data.images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = data.title;
-        scrollContainer.appendChild(img);
-      });
+  const bubbleDiv = document.querySelector(`.bubble[data-fullscreen-id="${id}"]`);
+  if (!bubbleDiv) return;
 
-      document.getElementById('fullscreenContent').innerHTML = data.content;
-      document.getElementById('fullscreenBubble').style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // Scroll auf Body verhindern
-    }
+  const fullscreen = document.createElement("div");
+  fullscreen.classList.add("fullscreen-bubble");
 
-    function closeFullscreenBubble() {
-      document.getElementById('fullscreenBubble').style.display = 'none';
-      document.body.style.overflow = ''; // Scroll wieder erlauben
-    }
+  // Überschrift
+  const h3 = document.createElement("h3");
+  h3.textContent = bubbleDiv.querySelector("h3").textContent;
+  fullscreen.appendChild(h3);
+
+  // Container für Bilder
+  const imagesContainer = document.createElement("div");
+  imagesContainer.classList.add("images-container");
+
+  if (bubblesWithImages[id]) {
+    bubblesWithImages[id].forEach(src => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `${id} Bild`;
+      imagesContainer.appendChild(img);
+    });
+  }
+
+  // Container für Text
+  const textContainer = document.createElement("div");
+  textContainer.classList.add("text-container");
+
+  // Text (Paragraph + Listen) kopieren
+  bubbleDiv.querySelectorAll("p, ul").forEach(node => {
+    textContainer.appendChild(node.cloneNode(true));
+  });
+
+  // Bilder und Text nebeneinander einfügen
+  fullscreen.appendChild(imagesContainer);
+  fullscreen.appendChild(textContainer);
+
+  // Schließen-Button
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "Schließen ✖";
+  closeBtn.classList.add("close-btn");
+  closeBtn.addEventListener("click", () => {
+    fullscreen.remove();
+  });
+
+  fullscreen.appendChild(closeBtn);
+  document.body.appendChild(fullscreen);
+
+  // Scroll to top
+  fullscreen.scrollTop = 0;
+}
   </script>
+  <footer>
+  <div class="footer-content">
+    <p>© 2025 Abu-Shagrah Handwerk. Alle Rechte vorbehalten.</p>
+    <p>Telefon: <a href="tel:+491234567890">+49 173 8401400</a> | E-Mail: <a href="mailto:info@abu-shagrah.de">abu-shagrah@web.de</a></p>
+  </div>
+</footer>
+
 </body>
 </html>
-
