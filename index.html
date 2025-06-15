@@ -1,81 +1,283 @@
 <!DOCTYPE html>
-
-<html lang="en" >
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web Abu-Shagrah</title>
-  <link rel="stylesheet" href="./style.css">
-  <script src="https://kit.fontawesome.com/247d417c90.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Handwerker Webseite mit Tabs</title>
+
+<!-- FontAwesome für Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  /* Grundlayout */
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+  }
+  .wrapper {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem 1rem 6rem;
+  }
+  h1, h2 {
+    margin-bottom: 0.5rem;
+    color: #1d3939;
+  }
+  p {
+    line-height: 1.5;
+  }
+
+  /* Logo oben */
+  #logo {
+    display: block;
+    margin: 1rem auto;
+    max-width: 280px;
+    height: auto;
+  }
+
+  /* Navigation oben */
+  nav#navbar {
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    background: #1d3939;
+    padding: 0.7rem 1rem;
+    z-index: 1000;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav#navbar a {
+    color: #008f8f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+  }
+  nav#navbar a.active {
+    background-color: #008f8f;
+    color: #000;
+  }
+  nav#navbar a:hover {
+    background-color: #008080;
+    color: black;
+  }
+
+  /* Rechte Navigationspunkte */
+  #nav-dots {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1100;
+  }
+  #nav-dots a {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ccc;
+    border: 2px solid #1d3939;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  #nav-dots a.active,
+  #nav-dots a:hover {
+    background: #008f8f;
+    border-color: #008f8f;
+  }
+
+  /* Tab-Buttons oben */
+  .tablink {
+    background-color:  #1D3939;
+    color: #008F8F;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s;
+  }
+  .tablink:hover {
+    background-color: #008F8F;
+    color: #000;
+  }
+  .tablink.active {
+    background-color: #008F8F;
+    color: #000;
+  }
+
+  /* Tab Content */
+  .tabcontent {
+    background: white;
+    margin-top: 20px;
+    padding: 20px 25px;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+    display: none;
+  }
+  .tabcontent.active {
+    display: block;
+  }
+
+  /* Überschriften in Tab Content */
+  .tabcontent h2 {
+    color: #1d3939;
+    margin-top: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav#navbar {
+      justify-content: center;
+    }
+    #nav-dots {
+      display: none;
+    }
+    .wrapper {
+      padding: 1rem 0.5rem 4rem;
+    }
+  }
+</style>
+
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - Web Abu-Shagrah</title>
-  <link rel="stylesheet" href="./style.css">
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<html lang= "de">
-	<head>
-		<meta charset="UTF-8">
-			<title>Abu-Shagrah</title>
-		<style>
-      
-      .ABU {display: block; width:	80%; heigt: auto ; margin-left: auto; margin-right: auto; margin-bottom: 15%; margin-top: 15%;}
-     
-         </style>
-    
-    	</head>
-	<body>
-	<img src="Abu-Shagrah Überschrift.png" class=ABU  alt="Abu-Shagrah"/>
-     <div id="navbar">
-        <nav>
-<button class="tablink" onclick="openPage('Home', this, '#FBC02D')" id="defaultOpen">
-    <i class="fa-solid fa-house "></i>
-     </button>
-<button class="tablink" onclick="openPage('News', this,'White')" >
-        <i class="fa-solid fa-briefcase "></i>  
-   </button>
-          
-<button class="tablink" onclick="openPage('Contact', this,'White')">
-            <i class="fa-solid fa-address-card fa-fade " ></i>
-   </button>
-         
-        </nav>
-    </div> 
-    
-    
-<div id="Home" class="tabcontent" style="text-align:center">
-  <h3>Unsere Dienstleistungen</h3>
-  	<p> Renovierung</p>
-	<p>Umzug</p>
-	<p>Montage von Werbeanlagen</p>
+<img src="Abu-Shagrah Überschrift.png" alt="Abu-Shagrah Logo" id="logo" />
+
+<!-- Navigation oben -->
+<nav id="navbar">
+  <button class="tablink active" onclick="openPage(event, 'Renovierung')" id="defaultOpen"><i class="fa fa-home"></i> Renovierung</button>
+  <button class="tablink" onclick="openPage(event, 'Kuechenmontage')"><i class="fa fa-utensils"></i> Küchenmontage</button>
+  <button class="tablink" onclick="openPage(event, 'Tapezieren')"><i class="fa fa-paint-roller"></i> Tapezieren</button>
+  <button class="tablink" onclick="openPage(event, 'Moebelmontage')"><i class="fa fa-couch"></i> Möbelmontage</button>
+  <button class="tablink" onclick="openPage(event, 'Trockenbau')"><i class="fa fa-toolbox"></i> Trockenbau</button>
+  <button class="tablink" onclick="openPage(event, 'Bodenlegearbeit')"><i class="fa fa-layer-group"></i> Bodenlegearbeit</button>
+  <button class="tablink" onclick="openPage(event, 'Malerarbeit')"><i class="fa fa-brush"></i> Malerarbeit</button>
+  <button class="tablink" onclick="openPage(event, 'Gartengestaltung')"><i class="fa fa-tree"></i> Gartengestaltung</button>
+</nav>
+
+<!-- Rechte Navigationspunkte -->
+<div id="nav-dots">
+  <a href="#Renovierung" class="active" title="Renovierung" onclick="openPage(event, 'Renovierung')"></a>
+  <a href="#Kuechenmontage" title="Küchenmontage" onclick="openPage(event, 'Kuechenmontage')"></a>
+  <a href="#Tapezieren" title="Tapezieren" onclick="openPage(event, 'Tapezieren')"></a>
+  <a href="#Moebelmontage" title="Möbelmontage" onclick="openPage(event, 'Moebelmontage')"></a>
+  <a href="#Trockenbau" title="Trockenbau" onclick="openPage(event, 'Trockenbau')"></a>
+  <a href="#Bodenlegearbeit" title="Bodenlegearbeit" onclick="openPage(event, 'Bodenlegearbeit')"></a>
+  <a href="#Malerarbeit" title="Malerarbeit" onclick="openPage(event, 'Malerarbeit')"></a>
+  <a href="#Gartengestaltung" title="Gartengestaltung" onclick="openPage(event, 'Gartengestaltung')"></a>
 </div>
 
-<div id="News" class="tabcontent" style="text-align:center">
-  <h3>Kommt Demnächst</h3>
-  <p>...</p>
+<div class="wrapper">
+  <div id="Renovierung" class="tabcontent active slide">
+    <h2>Renovierungsarbeiten</h2>
+    <p>Ob einzelne Räume oder das ganze Haus – wir bringen frischen Wind in Ihre vier Wände. Von der Planung bis zur Umsetzung stehen wir für saubere, termingerechte Renovierungen mit Liebe zum Detail.</p>
+  </div>
+
+  <div id="Kuechenmontage" class="tabcontent slide">
+    <h2>Küchenmontage</h2>
+    <p>Neue Küche? Kein Problem! Wir montieren Ihre Einbauküche präzise, passgenau und funktionsbereit – inklusive Anschluss von Geräten und Anpassungsarbeiten.</p>
+  </div>
+
+  <div id="Tapezieren" class="tabcontent slide">
+    <h2>Tapezierarbeiten</h2>
+    <p>Ob klassische Raufaser oder moderne Mustertapete – wir gestalten Ihre Wände professionell und sauber. Für ein wohnliches Zuhause mit Stil.</p>
+  </div>
+
+  <div id="Moebelmontage" class="tabcontent slide">
+    <h2>Möbelmontage</h2>
+    <p>Neue Möbel, aber keine Zeit oder Nerven für den Aufbau? Wir übernehmen das für Sie – schnell, zuverlässig und exakt nach Anleitung oder Maß.</p>
+  </div>
+
+  <div id="Trockenbau" class="tabcontent slide">
+    <h2>Trockenbau</h2>
+    <p>Flexible Raumlösungen nach Maß: Mit modernen Trockenbausystemen schaffen wir Trennwände, Abhängungen oder Verkleidungen ganz nach Ihren Vorstellungen.</p>
+  </div>
+
+  <div id="Bodenlegearbeit" class="tabcontent slide">
+    <h2>Bodenlegearbeiten</h2>
+    <p>Ob Laminat, Vinyl oder Teppich – wir verlegen Ihren neuen Boden fachgerecht und sorgen für ein perfektes Ergebnis, das Sie viele Jahre begleiten wird.</p>
+  </div>
+
+  <div id="Malerarbeit" class="tabcontent slide">
+    <h2>Malerarbeiten</h2>
+    <p>Frische Farbe für Ihr Zuhause: Wir streichen Wände und Decken mit hochwertigen Farben und einem sauberen Ergebnis – pünktlich und ordentlich.</p>
+  </div>
+
+  <div id="Gartengestaltung" class="tabcontent slide">
+    <h2>Gartengestaltung</h2>
+    <p>Ein schöner Garten beginnt mit guten Ideen – und einer fachgerechten Umsetzung. Wir gestalten Ihren Außenbereich nach Maß: funktional, stilvoll und mit viel Liebe zum Detail.</p>
+    <ul>
+      <li><strong>Pavillons mit natürlichem Dach:</strong> Wir bauen individuelle Gartenpavillons – z. B. mit Weinranken als lebendiges Schattendach – für entspannte Stunden im Freien.</li>
+      <li><strong>Zäune nach Maß:</strong> Stabil, langlebig und optisch passend – wir errichten Zäune, die Schutz bieten und den Garten harmonisch einrahmen.</li>
+      <li><strong>Bodenvorbereitung & Rollrasen:</strong> Wir ebnen unebenes Gelände, gleichen Höhen aus und verlegen Rollrasen – für ein sofort gepflegtes, sattgrünes Erscheinungsbild.</li>
+      <li><strong>Fahrradständer mit Überdachung:</strong> Praktische und wettergeschützte Lösungen für Ihre Fahrräder – funktional und optisch ansprechend.</li>
+    </ul>
+  </div>
 </div>
 
-<div id="Contact" class="tabcontent" style="text-align:center">
-  <h3>Kontaktdaten</h3>
-  <p><i class="fa-solid fa-phone fa-shake"></i> +49 173 8401400</p>
-  <p><i class="fa-solid fa-envelope fa-bounce"></i> abu-shagrah@web.de</p>
-</div>
+<!-- GSAP + ScrollMagic Animation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
 
+<script>
+  // Tab-Funktion
+  function openPage(evt, pageName) {
+    // Alle tabcontent ausblenden
+    let tabcontent = document.querySelectorAll(".tabcontent");
+    tabcontent.forEach(tc => tc.classList.remove("active"));
 
-    
-    </body>
+    // Alle Buttons in der Navbar deaktivieren
+    let tablinks = document.querySelectorAll(".tablink");
+    tablinks.forEach(btn => btn.classList.remove("active"));
 
+    // Alle rechten Punkte deaktivieren
+    let navDots = document.querySelectorAll("#nav-dots a");
+    navDots.forEach(dot => dot.classList.remove("active"));
 
+    // Die gewählte Seite zeigen
+    document.getElementById(pageName).classList.add("active");
 
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
+    // Den geklickten Button aktivieren
+    evt.currentTarget.classList.add("active");
+
+    // Auch den rechten Punkt aktivieren, der zum Tab passt
+    navDots.forEach(dot => {
+      if(dot.getAttribute("href") === "#" + pageName) {
+        dot.classList.add("active");
+      }
+    });
+  }
+
+  // Standard-Tab öffnen beim Laden
+  document.getElementById("defaultOpen").click();
+
+  // ScrollMagic & GSAP Animation für .slide Elemente
+  const controller = new ScrollMagic.Controller();
+  document.querySelectorAll(".slide").forEach(slide => {
+    const tween = gsap.from(slide, {opacity: 0, y: 80, duration: 0.6, ease: "power2.out"});
+    new ScrollMagic.Scene({
+      triggerElement: slide,
+      triggerHook: 0.85,
+      reverse: false
+    })
+    .setTween(tween)
+    .addTo(controller);
+  });
+</script>
 
 </body>
 </html>
