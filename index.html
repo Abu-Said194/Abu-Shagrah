@@ -98,22 +98,27 @@
 .bubble {
   background-size: cover;
   background-position: center;
-  color: white; /* Hellt den Text auf dunklem Bild auf */
+  color: white;
   position: relative;
   overflow: hidden;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.2rem 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
-
 .bubble::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4); /* dunkler Overlay für bessere Lesbarkeit */
+  background: rgba(0,0,0,0.4);
   z-index: 0;
 }
 .bubble > * {
   position: relative;
   z-index: 1;
 }
+
 
     .bubble {
       background: #e0f7f7;
@@ -384,19 +389,16 @@ footer a:hover {
     const bubbles = document.querySelectorAll(".bubble");
 
 bubbles.forEach(bubble => {
-  // Hintergrundbild setzen
   const id = bubble.dataset.fullscreenId;
-  if (bubblesWithImages[id] && bubblesWithImages[id].length > 0) {
+  if (bubblesWithImages[id]?.length > 0) {
     bubble.style.backgroundImage = `url('${bubblesWithImages[id][0]}')`;
   }
 
-  // Erstes Vorschaubild POSITIONIEREN und KOPIEREN (wie bisher):
-  const firstImg = document.createElement("img");
-  firstImg.src = bubblesWithImages[id][0];
-  firstImg.alt = `${id} Vorschau`;
-  bubble.appendChild(firstImg);
+  // Entferne folgenden Block (Vorschaubild) komplett:
+  // const firstImg = document.createElement("img");
+  // firstImg.src = ... 
+  // bubble.appendChild(firstImg);
 
-  // Klick-Handler etc.
   bubble.addEventListener("click", () => {
     openFullscreenBubble(id);
   });
