@@ -195,6 +195,17 @@
       cursor: pointer;
       z-index: 10000;
     }
+
+    /* NEU: Bilder in Blasen unter Dienstleistungen */
+    .bubble img {
+      max-width: 100%;
+      height: auto;
+      max-height: 200px;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -277,82 +288,128 @@
 
   <div id="Contact" class="tabcontent" style="text-align:center;">
     <h2>Kontaktieren Sie uns</h2>
-    <p>Sie haben Fragen oder möchten Ihr Projekt besprechen? Wir sind gern für Sie da!</p>
-    <p><i class="fa-solid fa-phone fa-shake"></i> Telefon: <a href="tel:+491738401400">+49 173 8401400</a></p>
-    <p><i class="fa-solid fa-envelope fa-bounce"></i> E-Mail: <a href="mailto:abu-shagrah@web.de">abu-shagrah@web.de</a></p>
-    <p>Oder senden Sie uns eine Nachricht über unser Kontaktformular (demnächst verfügbar).</p>
+    <p>Sie haben Fragen oder möchten ein Angebot anfordern? Schreiben Sie uns oder rufen Sie an:</p>
+    <p><i class="fa-solid fa-phone"></i> Telefon: 01234 567890</p>
+    <p><i class="fa-solid fa-envelope"></i> E-Mail: info@abu-shagrah.de</p>
+    <p><i class="fa-solid fa-location-dot"></i> Adresse: Musterstraße 12, 12345 Musterstadt</p>
   </div>
 
   <script>
     function openPage(evt, pageName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].classList.remove("active");
-      }
-      tablinks = document.getElementsByClassName("tablink");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-      }
-      document.getElementById(pageName).classList.add("active");
-      evt.currentTarget.classList.add("active");
+      // Tabcontent ausblenden
+      const tabcontents = document.querySelectorAll('.tabcontent');
+      tabcontents.forEach(tc => tc.classList.remove('active'));
+
+      // Tabs inaktiv
+      const tablinks = document.querySelectorAll('.tablink');
+      tablinks.forEach(tl => tl.classList.remove('active'));
+
+      // Aktive Seite und Tab anzeigen
+      document.getElementById(pageName).classList.add('active');
+      evt.currentTarget.classList.add('active');
     }
 
-    document.getElementById("defaultOpen").click();
+    // Standard-Tab öffnen
+    document.getElementById('defaultOpen').click();
 
+    // Scroll-Animation für slide-in
+    const slideIns = document.querySelectorAll('.slide-in');
     function checkSlide() {
-      const slideIns = document.querySelectorAll('.slide-in');
-      slideIns.forEach(el => {
-        const slideInAt = window.scrollY + window.innerHeight - el.offsetHeight / 3;
-        const elementBottom = el.offsetTop + el.offsetHeight;
-        const isHalfShown = slideInAt > el.offsetTop;
-        const isNotScrolledPast = window.scrollY < elementBottom;
-        if (isHalfShown && isNotScrolledPast) {
-          el.classList.add('visible');
+      slideIns.forEach(slideIn => {
+        const slideInAt = window.scrollY + window.innerHeight - slideIn.offsetHeight / 3;
+        const elementBottom = slideIn.offsetTop + slideIn.offsetHeight;
+        if (slideInAt > slideIn.offsetTop && window.scrollY < elementBottom) {
+          slideIn.classList.add('visible');
         } else {
-          el.classList.remove('visible');
+          slideIn.classList.remove('visible');
         }
       });
     }
     window.addEventListener('scroll', checkSlide);
-    window.addEventListener('load', checkSlide);
+    checkSlide();
 
-    // Vollbild-Bubble Logik
-    const dienstleistungsContainer = document.getElementById('Dienstleistungen');
+    // Vollbild-Ansicht für Dienstleistungen
+    document.querySelectorAll('.bubble, #garten-blase').forEach(bubble => {
+      bubble.addEventListener('click', () => {
+        const id = bubble.getAttribute('data-fullscreen-id');
+        if (!id) return;
 
-    dienstleistungsContainer.addEventListener('click', function(event) {
-      // Finde, ob eine Bubble (oder Garten-Blase) geklickt wurde
-      let target = event.target;
-      while (target && !target.classList.contains('bubble') && target.id !== 'garten-blase') {
-        target = target.parentElement;
-      }
-      if (!target) return;
+        // Daten zu den jeweiligen Inhalten
+        const data = {
+          renovierung: {
+            title: "Renovierungsarbeiten – Frischer Wind für Ihr Zuhause",
+            text: "Ob einzelne Räume oder komplette Sanierungen: Wir renovieren fachgerecht, termintreu und mit viel Liebe zum Detail. Von Boden bis Decke – wir schaffen Wohnqualität, die begeistert.",
+          },
+          trockenbau: {
+            title: "Trockenbau – Flexible Raumlösungen",
+            text: "Trennwände, Deckenabhängungen oder Verkleidungen – wir setzen Ihre Wünsche im Trockenbau passgenau um und sorgen für funktionale und optisch ansprechende Ergebnisse.",
+          },
+          küchenmontage: {
+            title: "Küchenmontage – Perfekt eingebaut und anschlussfertig",
+            text: "Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.",
+            images: ["kh_4.jpeg", "kh1.jpeg"]
+          },
+          tapezieren: {
+            title: "Tapezierarbeiten – Stilvolle Wände für mehr Wohlfühlatmosphäre",
+            text: "Von klassischer Raufaser bis zu modernen Mustertapeten: Wir gestalten Ihre Wände präzise und sauber, damit Ihr Zuhause Charakter bekommt.",
+            images: ["IMG_20181208_191937.jpg"]
+          },
+          garten: {
+            title: "Gartengestaltung – Ihr grünes Paradies zum Wohlfühlen",
+            text: "Wir gestalten Ihren Garten nach Maß, mit funktionalen und stilvollen Elementen:",
+            list: [
+              "Pavillons mit natürlichem Dach, z.B. Weinranken",
+              "Stabile und langlebige Zäune als Sichtschutz und Rahmen",
+              "Fahrradständer mit wettergeschützter Überdachung",
+              "Professioneller Bodenausgleich und Rollrasen für ein sattes Grün"
+            ]
+          }
+        };
 
-      // Erstelle Vollbild-Blase
-      const fullscreen = document.createElement('div');
-      fullscreen.classList.add('fullscreen-bubble');
+        const content = data[id];
+        if (!content) return;
 
-      // Close Button
-      const closeBtn = document.createElement('button');
-      closeBtn.textContent = 'Zurück';
-      closeBtn.classList.add('close-btn');
-      closeBtn.addEventListener('click', () => {
-        fullscreen.remove();
+        // Vollbild-Div erzeugen
+        const fullDiv = document.createElement('div');
+        fullDiv.className = 'fullscreen-bubble';
+
+        // Schließen-Button
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.textContent = 'Schließen';
+        closeBtn.onclick = () => document.body.removeChild(fullDiv);
+        fullDiv.appendChild(closeBtn);
+
+        // Inhalt
+        const h3 = document.createElement('h3');
+        h3.textContent = content.title;
+        fullDiv.appendChild(h3);
+
+        const p = document.createElement('p');
+        p.textContent = content.text;
+        fullDiv.appendChild(p);
+
+        if (content.images) {
+          content.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = content.title;
+            fullDiv.appendChild(img);
+          });
+        }
+
+        if (content.list) {
+          const ul = document.createElement('ul');
+          content.list.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            ul.appendChild(li);
+          });
+          fullDiv.appendChild(ul);
+        }
+
+        document.body.appendChild(fullDiv);
       });
-      fullscreen.appendChild(closeBtn);
-
-      // Inhalt der Blase klonen und reinpacken (ohne Close Button)
-      let contentClone = target.cloneNode(true);
-      contentClone.style.cursor = 'default'; // keine Hand mehr
-      contentClone.classList.remove('bubble');
-      contentClone.classList.remove('slide-in');
-      contentClone.querySelectorAll('.close-btn').forEach(el => el.remove()); // evtl. alte Close-Buttons entfernen
-
-      fullscreen.appendChild(contentClone);
-      document.body.appendChild(fullscreen);
-
-      // Scroll nach oben der Vollbild-Blase
-      fullscreen.scrollTop = 0;
     });
   </script>
 </body>
