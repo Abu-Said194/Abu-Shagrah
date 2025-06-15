@@ -179,11 +179,22 @@
       margin-top: 0;
     }
 
-    .fullscreen-bubble img {
-      width: 100%;
+    /* Horizontal scrollbarer Container für Vollbildbilder */
+    .fullscreen-images-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
+      direction: rtl; /* Für Scrollen von rechts nach links */
+    }
+
+    .fullscreen-images-container img {
+      flex: 0 0 auto;
+      width: 300px;
       border-radius: 8px;
-      margin: 1rem 0;
-      max-width: none;
+      object-fit: contain;
+      direction: ltr; /* Bilder normal ausrichten */
     }
 
     .fullscreen-bubble ul {
@@ -258,104 +269,76 @@
 
     <div class="bubble slide-in" data-fullscreen-id="küchenmontage">
       <h3>Küchenmontage – Perfekt eingebaut und anschlussfertig</h3>
-      <p>Ob Neuküche oder Umbau: Wir montieren Ihre Küche exakt, schließen alle Geräte an und übernehmen notwendige Anpassungen – zuverlässig und sauber.</p>
+      <p>Ob Neuküche oder Umbau – wir montieren Ihre Küchenmöbel sicher, exakt und auf Wunsch auch mit Anschlussarbeiten für Elektro und Wasser.</p>
     </div>
 
-    <div class="bubble slide-in" data-fullscreen-id="tapezieren">
-      <h3>Tapezieren – Kreative Wandgestaltung</h3>
-      <p>Vom klassischen Anstrich bis zur modernen Tapete – wir verschönern Ihre Wände mit Sorgfalt und Präzision, damit Sie sich rundum wohlfühlen.</p>
-    </div>
-
-    <div class="bubble slide-in" data-fullscreen-id="garten" id="garten-blase">
+    <div class="bubble slide-in" data-fullscreen-id="gartenbau" id="garten-blase">
       <div class="overlay"></div>
       <div class="content">
-        <h3>Gartenanlagen – Natur trifft Design</h3>
-        <p>Wir gestalten Ihre Außenbereiche ganz nach Ihren Vorstellungen: Beete anlegen, Rollrasen verlegen, Zäune bauen und Gartenpavillons errichten – für einen harmonischen Rückzugsort.</p>
+        <h3>Garten- & Landschaftsbau – Ihr grünes Paradies</h3>
+        <p>Wir gestalten Ihren Garten individuell und professionell. Von der Anlage über Rollrasen bis zu Pflasterarbeiten bringen wir Ihre Außenanlagen zum Strahlen.</p>
       </div>
-    </div>
-
-    <div class="bubble slide-in" data-fullscreen-id="werbeanlagen">
-      <h3>Werbeanlagen – Professionelle Montage und Elektronik</h3>
-      <p>
-        Wir montieren Werbeanlagen wie Werbevitrinen und Poster, z.B. in Parkhäusern, inklusive Plakatierung und der Installation von Elektronik. 
-        Dazu gehören der fachgerechte Einbau und das Anschließen von Lampen für optimale Beleuchtung.
-      </p>
     </div>
   </div>
 
-  <div id="Contact" class="tabcontent">
-    <h2>Kontakt</h2>
-    <p>Wir freuen uns auf Ihre Nachricht!</p>
-    <p>
-      Telefon: <a href="tel:+491234567890">+49 123 4567890</a><br />
-      E-Mail: <a href="mailto:info@abu-shagrah.de">info@abu-shagrah.de</a>
-    </p>
+  <div id="Contact" class="tabcontent slide-in">
+    <h2>Kontaktieren Sie uns</h2>
+    <p>Telefon: <a href="tel:+49123456789">+49 123 456 789</a></p>
+    <p>Email: <a href="mailto:info@abu-shagrah.de">info@abu-shagrah.de</a></p>
+    <p>Adresse: Musterstraße 12, 12345 Musterstadt</p>
   </div>
 
   <script>
-    // Tabnavigation
+    // Tab-Navigation
     function openPage(evt, pageName) {
-      const tabcontent = document.querySelectorAll(".tabcontent");
-      tabcontent.forEach((tab) => tab.classList.remove("active"));
-
-      const tablinks = document.querySelectorAll(".tablink");
-      tablinks.forEach((tab) => tab.classList.remove("active"));
-
+      document.querySelectorAll(".tabcontent").forEach(tc => {
+        tc.classList.remove("active");
+      });
+      document.querySelectorAll(".tablink").forEach(tab => {
+        tab.classList.remove("active");
+      });
       document.getElementById(pageName).classList.add("active");
       evt.currentTarget.classList.add("active");
     }
-
     document.getElementById("defaultOpen").click();
 
-    // Scroll Animation
-    const slideIns = document.querySelectorAll(".slide-in");
-
-    function checkSlide() {
-      const triggerBottom = window.innerHeight * 0.9;
-
-      slideIns.forEach((slideIn) => {
-        const top = slideIn.getBoundingClientRect().top;
-        if (top < triggerBottom) {
-          slideIn.classList.add("visible");
+    // Slide-in animation beim Scrollen
+    function handleScroll() {
+      document.querySelectorAll(".slide-in").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add("visible");
         }
       });
     }
-    window.addEventListener("scroll", checkSlide);
-    checkSlide();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("load", handleScroll);
 
-    // Bilder und Vollbild-Funktionalität
+    // Daten der Bilder für die Vollbildansicht
     const bubblesWithImages = {
-      renovierung:["20150529_210708.jpg","IMG_20181127_143356.jpg","20220131_010206.jpg"],
-      trockenbau: ["trockenbau1.jpg", "trockenbau2.jpg"],
-      küchenmontage: ["kh_4.jpeg", "kh1.jpeg"],
-      tapezieren: ["IMG_20181208_191937.jpg"],
-      garten: ["garten1.jpg", "garten2.jpg"],
-      werbeanlagen: ["20160319_181934.jpg", "20201202_183828.jpg", "20161208_025358.jpg"]
+      renovierung: [
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149137/abushagrah/IMG_20201023_135829_jyq3dn.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149138/abushagrah/IMG_20201023_135843_c3rj7o.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149138/abushagrah/IMG_20201023_135903_c7yro3.jpg"
+      ],
+      trockenbau: [
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201112_100927_czx9ko.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201112_100939_kshm2g.jpg"
+      ],
+      küchenmontage: [
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201017_113619_dptco2.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149139/abushagrah/IMG_20201017_113643_wz7xsf.jpg"
+      ],
+      gartenbau: [
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG_20200503_134326_bu0pcf.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG-20200503-WA0004_ghzzos.jpg",
+        "https://res.cloudinary.com/db84a0nmj/image/upload/v1697149140/abushagrah/IMG-20200503-WA0005_tl1yi9.jpg"
+      ]
     };
 
-    const bubbles = document.querySelectorAll(".bubble");
-
-    bubbles.forEach(bubble => {
-      // Bilder aus vorhandenen img-Tags entfernen (keine mehr drin)
-      bubble.querySelectorAll("img").forEach(img => img.remove());
-
-      const id = bubble.dataset.fullscreenId;
-      if (bubblesWithImages[id]) {
-        // Erstes Bild als Vorschau anhängen
-        const firstImg = document.createElement("img");
-        firstImg.src = bubblesWithImages[id][0];
-        firstImg.alt = `${id} Vorschau`;
-        bubble.appendChild(firstImg);
-      }
-
-      // Klick zum Öffnen Vollbild
-      bubble.addEventListener("click", () => {
-        openFullscreenBubble(id);
-      });
-    });
-
-    // Vollbild-Bubble
+    // Vollbild-Bubble öffnen
     function openFullscreenBubble(id) {
+      // Vorhandene entfernen
       const existing = document.querySelector(".fullscreen-bubble");
       if (existing) existing.remove();
 
@@ -370,18 +353,22 @@
       h3.textContent = bubbleDiv.querySelector("h3").textContent;
       fullscreen.appendChild(h3);
 
-      // Alle Bilder anzeigen
+      // Bilder horizontal scrollbar von rechts nach links
       if (bubblesWithImages[id]) {
+        const imagesContainer = document.createElement("div");
+        imagesContainer.classList.add("fullscreen-images-container");
+
         bubblesWithImages[id].forEach(src => {
           const img = document.createElement("img");
           img.src = src;
           img.alt = `${id} Bild`;
-          fullscreen.appendChild(img);
+          imagesContainer.appendChild(img);
         });
+
+        fullscreen.appendChild(imagesContainer);
       }
 
-      // Text (Paragraph + Listen) kopieren
-      // Wir kopieren nur die ersten P und UL des Originals (vereinfachte Lösung)
+      // Text (p und ul) kopieren
       bubbleDiv.querySelectorAll("p, ul").forEach(node => {
         fullscreen.appendChild(node.cloneNode(true));
       });
@@ -393,12 +380,24 @@
       closeBtn.addEventListener("click", () => {
         fullscreen.remove();
       });
-
       fullscreen.appendChild(closeBtn);
+
       document.body.appendChild(fullscreen);
-      // Scroll to top
       fullscreen.scrollTop = 0;
     }
+
+    // Klick-Handler für Bubbles
+    document.querySelectorAll(".bubble").forEach(bubble => {
+      bubble.addEventListener("click", () => {
+        const id = bubble.dataset.fullscreenId;
+        if (id) openFullscreenBubble(id);
+      });
+    });
+
+    // Besonderer Klick für garten-blase (mit Hintergrundbild)
+    document.getElementById("garten-blase").addEventListener("click", () => {
+      openFullscreenBubble("gartenbau");
+    });
   </script>
 </body>
 </html>
