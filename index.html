@@ -470,6 +470,42 @@ footer a:hover {
     <a href="mailto:abu-shagrah@web.de">abu-shagrah@web.de</a>
   </p>
   <p>
+    <span class="bounce">
+      <i class="fas fa-location-dot gps-icon"></i> Hessen
+    </span>
+  </p>
+</div>
+
+<!-- Font Awesome CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<style>
+  .bounce {
+    display: inline-block;
+    animation: bounce 1.5s infinite;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #008f8f;
+    vertical-align: middle;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .gps-icon {
+    margin-right: 0.3rem;
+    color: #f44336;
+  }
+</style>
 
 </div>
 <form method="post" action="kontakt.php" class="contact-form">
