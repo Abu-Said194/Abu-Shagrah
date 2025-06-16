@@ -349,7 +349,44 @@ footer a:hover {
     margin-right: 0.3rem;
     color: black;
   }
+.umzug-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 2rem 0;
+  gap: 1rem;
+}
 
+.umzug-container p {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+  max-width: 60%;
+  white-space: normal;
+}
+
+.umzug-container img {
+  max-width: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Für kleine Bildschirme (Smartphones) */
+@media (max-width: 600px) {
+  .umzug-container {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .umzug-container p {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  .umzug-container img {
+    max-width: 100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -383,11 +420,11 @@ footer a:hover {
         <li><strong>Vielseitigkeit:</strong> Vom Neubau über Renovierung bis zur Gartenanlage – wir sind Ihr Allrounder.</li>
       </ul>
     </section>
-<div class="umzug-container slide-in" style="display: flex; align-items: center; justify-content: flex-end; margin: 2rem 0;">
-  <p style="font-weight: bold; font-size: 1.1rem; margin-right: 1rem;">
+<div class="umzug-container slide-in">
+  <p>
     Gerne helfen wir auch bei Transport und Umzug
   </p>
-  <img src="IMG-20190110-WA0010.jpg" alt="Umzugshilfe" style="max-width: 300px; width: auto; height: auto; border-radius: 8px;" />
+  <img src="IMG-20190110-WA0010.jpg" alt="Umzugshilfe" />
 </div>
 
   
