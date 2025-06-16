@@ -105,6 +105,7 @@
   width: 95%;  /* oder feste Breite z. B. 400px */
   height: 400px;
   padding-top: 50%;      /* Höhe proportional zur Breite (hier 50% = halbe Höhe) */
+  padding-side: 50%;
   background-image: url('bubble.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -162,36 +163,6 @@
     }
     a:hover {
       text-decoration: underline;
-    }
-
-    #garten-blase {
-      position: relative;
-      color: white;
-      padding: 3rem 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      overflow: hidden;
-    
-      cursor: pointer;
-      transition: box-shadow 0.3s ease;
-    }
-    #garten-blase:hover {
-      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-    }
-
-    #garten-blase > .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 16px;
-      z-index: 0;
-    }
-
-    #garten-blase > .content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
     }
 
     /* Vollbild-Blase */
@@ -399,7 +370,7 @@ footer a:hover {
   <div id="Home" class="tabcontent">
     <h1 class="slide-in">25 Jahre Handwerk mit Leidenschaft & Präzision</h1>
     <p class="slide-in">
-      Seit über 25 Jahren ist die Firma Abu-Shagrah Ihr verlässlicher Partner für hochwertige Handwerksarbeiten in und um Ihr Zuhause. 
+      Seit über 25 Jahren ist die Firma Abu-Shagrah in Hessen Ihr verlässlicher Partner für hochwertige Handwerksarbeiten in und um Ihr Zuhause. 
       Wir kombinieren traditionelle Handwerkskunst mit modernster Technik, um Ihre Projekte termingerecht und in bester Qualität umzusetzen.
     </p>
     <section class="slide-in">
@@ -416,7 +387,7 @@ footer a:hover {
   <p style="font-weight: bold; font-size: 1.1rem; margin-right: 1rem;">
     Gerne helfen wir auch bei Transport und Umzug
   </p>
-  <img src="IMG-20190110-WA0010.jpg" alt="Umzugshilfe" style="max-width: 300px; width: 100%; height: auto; border-radius: 8px;" />
+  <img src="IMG-20190110-WA0010.jpg" alt="Umzugshilfe" style="max-width: 300px; width: auto; height: auto; border-radius: 8px;" />
 </div>
 
   
