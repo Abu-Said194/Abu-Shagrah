@@ -554,20 +554,7 @@ footer a:hover {
   </div>
 </form>
   <script>
-    // Tabnavigation
-    function openPage(evt, pageName) {
-      const tabcontent = document.querySelectorAll(".tabcontent");
-      tabcontent.forEach((tab) => tab.classList.remove("active"));
-
-      const tablinks = document.querySelectorAll(".tablink");
-      tablinks.forEach((tab) => tab.classList.remove("active"));
-
-      document.getElementById(pageName).classList.add("active");
-      evt.currentTarget.classList.add("active");
-    }
-
-    document.getElementById("defaultOpen").click();
-
+  
     // Scroll Animation
     const slideIns = document.querySelectorAll(".slide-in");
 
@@ -621,23 +608,23 @@ let controllerInstance = initScrollMagicForActiveTab();
 // Tabnavigation erweitern, damit beim Tab-Wechsel ScrollMagic neu init ist
 function openPage(evt, pageName) {
   const tabcontent = document.querySelectorAll(".tabcontent");
-  tabcontent.forEach((tab) => tab.classList.remove("active"));
+  tabcontent.forEach(tab => tab.classList.remove("active"));
 
   const tablinks = document.querySelectorAll(".tablink");
-  tablinks.forEach((tab) => tab.classList.remove("active"));
+  tablinks.forEach(tab => tab.classList.remove("active"));
 
   document.getElementById(pageName).classList.add("active");
   evt.currentTarget.classList.add("active");
 
-  // Alte ScrollMagic Instanz zerstören
   if (controllerInstance) {
     controllerInstance.destroy(true);
   }
 
-  // Neue ScrollMagic Szenen für neuen Tab initialisieren
   controllerInstance = initScrollMagicForActiveTab();
-}
 
+  // Scroll nach oben, sanftes Scrollen:
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 document.getElementById("defaultOpen").click();
 
 
