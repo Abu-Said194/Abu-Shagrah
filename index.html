@@ -6,6 +6,7 @@
   <title>Abu-Shagrah</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
 
   <style>
     body {
@@ -18,9 +19,9 @@
 
     .ABU {
       display: block;
-      width: 80%;
+      width: 100%;
       height: auto;
-      margin: 1rem auto;
+      margin: auto;
     }
 
     nav {
@@ -82,7 +83,7 @@
     }
 
     h1, h2, h3 {
-      color: #1d3939;
+      color: #00ccce;
       margin-top: 1rem;
     }
 
@@ -96,9 +97,14 @@
       padding-left: 1.2rem;
     }
 .bubble {
+  position: relative;
+  width: 95%;  /* oder feste Breite z. B. 400px */
+  height: 400px;
+  padding-top: 50%;      /* Höhe proportional zur Breite (hier 50% = halbe Höhe) */
+  background-image: url('bubble.png');
   background-size: contain;
-background-repeat: no-repeat;
-background-position: center;
+  background-repeat: no-repeat;
+  background-position: center;
   color: white;
   position: relative;
   overflow: hidden;
@@ -128,12 +134,15 @@ background-position: center;
       margin: 1.2rem 0;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
       position: relative;
     }
     .bubble:hover {
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px) scale(1.05);
+}
 
     .bubble img {
       max-width: 100%;
@@ -158,7 +167,7 @@ background-position: center;
       border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       overflow: hidden;
-      background: url('IMG-20200503-WA0004.jpg') center center / cover no-repeat;
+    
       cursor: pointer;
       transition: box-shadow 0.3s ease;
     }
@@ -217,7 +226,8 @@ background-position: center;
 }
 
 .fullscreen-bubble img {
-  width: 100%;
+  max-width: 400px;
+  width: auto;
   height: auto;
   border-radius: 8px;
   object-fit: contain;
@@ -240,11 +250,11 @@ background-position: center;
   cursor: pointer;
   z-index: 10000;
 }
-    footer {
+footer {
   background-color: #1d3939;
   color: white;
-  text-align: center;
-  padding: 1rem 1rem;
+  text-align: center;  /* Alle Inhalte im Footer zentrieren */
+  padding: 1rem;
   font-size: 14px;
   margin-top: 2rem;
 }
@@ -259,6 +269,90 @@ footer a:hover {
   color: #008f8f;
   text-decoration: underline;
 }
+
+.footer-content {
+  max-width: 800px;    /* Optional, damit der Inhalt nicht zu breit wird */
+  margin: 0 auto;      /* Zentriert den Block innerhalb des Footers */
+}
+.contact-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form input[type="tel"]:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #007b7b;
+  box-shadow: 0 0 4px #007b7b;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .checkbox-group label {
+  font-weight: normal;
+  color: #555;
+}
+
+.contact-form a {
+  color: #007b7b;
+  text-decoration: none;
+}
+
+.contact-form a:hover {
+  text-decoration: underline;
+}
+
+.contact-form button {
+  background-color: #007b7b;
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #005f5f;
+}
+
 
   </style>
 </head>
@@ -283,7 +377,6 @@ footer a:hover {
       Seit über 25 Jahren ist die Firma Abu-Shagrah Ihr verlässlicher Partner für hochwertige Handwerksarbeiten in und um Ihr Zuhause. 
       Wir kombinieren traditionelle Handwerkskunst mit modernster Technik, um Ihre Projekte termingerecht und in bester Qualität umzusetzen.
     </p>
-
     <section class="slide-in">
       <h2>Unsere Stärken – Ihre Vorteile</h2>
       <ul>
@@ -294,7 +387,14 @@ footer a:hover {
         <li><strong>Vielseitigkeit:</strong> Vom Neubau über Renovierung bis zur Gartenanlage – wir sind Ihr Allrounder.</li>
       </ul>
     </section>
+<div class="umzug-container slide-in" style="display: flex; align-items: center; justify-content: flex-end; margin: 2rem 0;">
+  <p style="font-weight: bold; font-size: 1.1rem; margin-right: 1rem;">
+    Gerne helfen wir auch bei Transport und Umzug
+  </p>
+  <img src="IMG-20190110-WA0010.jpg" alt="Umzugshilfe" style="max-width: 300px; width: 100%; height: auto; border-radius: 8px;" />
+</div>
 
+  
     <section class="slide-in">
       <h2>Wir freuen uns auf Ihr Projekt!</h2>
       <p>Kontaktieren Sie uns für eine unverbindliche Beratung. Gemeinsam planen wir Ihren Auftrag maßgeschneidert und realisieren ihn mit Sorgfalt und Leidenschaft.</p>
@@ -339,13 +439,77 @@ footer a:hover {
     </div>
   </div>
 
-  <div id="Contact" class="tabcontent">
-    <h2>Kontakt</h2>
-    <p>Wir freuen uns auf Ihre Nachricht!</p>
-   <p><i class="fa-solid fa-phone fa-shake"></i> +49 173 8401400</p>
-  <p><i class="fa-solid fa-envelope fa-bounce"></i> abu-shagrah@web.de</p>
+ <div id="Contact" class="tabcontent">
+  <h2>Kontakt</h2>
+  <p>Wir freuen uns auf Ihre Nachricht!</p>
+  <p>
+    <i class="fa-solid fa-phone fa-shake"></i>
+    <a href="tel:+491738401400">+49 173 8401400</a>
+  </p>
+  <p>
+    <i class="fa-solid fa-envelope fa-bounce"></i>
+    <a href="mailto:abu-shagrah@web.de">abu-shagrah@web.de</a>
+  </p>
+  <p>
+
+</div>
+<form method="post" action="kontakt.php" class="contact-form">
+  <div class="form-group">
+    <label for="salutation">Anrede<span>*</span></label>
+    <select id="salutation" name="salutation" required>
+      <option value="">Bitte auswählen</option>
+      <option value="Frau">Frau</option>
+      <option value="Herr">Herr</option>
+    </select>
   </div>
 
+  <div class="form-group">
+    <label for="service">Leistung<span>*</span></label>
+    <select id="service" name="service" required>
+      <option value="">Bitte auswählen</option>
+      <option value="Küchen Montage">Küchen Montage</option>
+      <option value="Hausgeräte Anschließen">Hausgeräte Anschließen</option>
+      <option value="Möbelmontage">Möbelmontage</option>
+      <option value="Malerarbeiten">Malerarbeiten</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="firstName">Vorname<span>*</span></label>
+    <input id="firstName" type="text" name="firstName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Nachname<span>*</span></label>
+    <input id="lastName" type="text" name="lastName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">E-Mail Adresse<span>*</span></label>
+    <input id="email" type="email" name="email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Telefon</label>
+    <input id="phone" type="tel" name="phone">
+  </div>
+
+  <div class="form-group">
+    <label for="concern">Ihr Anliegen</label>
+    <textarea id="concern" name="concern" rows="4"></textarea>
+  </div>
+
+  <div class="form-group checkbox-group">
+    <label>
+      <input type="checkbox" name="privacy" required>
+      Ich bin damit einverstanden, dass meine Angaben gespeichert werden. <a href="datenschutz.html">Datenschutz</a>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button type="submit">Absenden</button>
+  </div>
+</form>
   <script>
     // Tabnavigation
     function openPage(evt, pageName) {
@@ -377,33 +541,86 @@ footer a:hover {
     window.addEventListener("scroll", checkSlide);
     checkSlide();
 
+// Controller erzeugen
+const controller = new ScrollMagic.Controller();
+
+// Funktion, die Szenen für slide-in-Elemente in der aktiven Seite anlegt
+function initScrollMagicForActiveTab() {
+  // Erst alle bisherigen Szenen löschen (oder Seite reloaden)
+  controller.destroy(true);
+  
+  // Neuer Controller (wegen destroy)
+  const newController = new ScrollMagic.Controller();
+
+  // Selektiere slide-in Elemente im aktuell aktiven Tab
+  const activeTab = document.querySelector(".tabcontent.active");
+  if (!activeTab) return;
+
+  const slideIns = activeTab.querySelectorAll(".slide-in");
+
+  slideIns.forEach(el => {
+    new ScrollMagic.Scene({
+      triggerElement: el,
+      triggerHook: 0.9,  // ca. 90% vom viewport top
+      reverse: true       // animiert auch beim Scroll zurück
+    })
+    .on("enter", () => el.classList.add("visible"))
+    .on("leave", () => el.classList.remove("visible"))
+    .addTo(newController);
+  });
+
+  return newController;
+}
+
+// Initial einmal anlegen
+let controllerInstance = initScrollMagicForActiveTab();
+
+// Tabnavigation erweitern, damit beim Tab-Wechsel ScrollMagic neu init ist
+function openPage(evt, pageName) {
+  const tabcontent = document.querySelectorAll(".tabcontent");
+  tabcontent.forEach((tab) => tab.classList.remove("active"));
+
+  const tablinks = document.querySelectorAll(".tablink");
+  tablinks.forEach((tab) => tab.classList.remove("active"));
+
+  document.getElementById(pageName).classList.add("active");
+  evt.currentTarget.classList.add("active");
+
+  // Alte ScrollMagic Instanz zerstören
+  if (controllerInstance) {
+    controllerInstance.destroy(true);
+  }
+
+  // Neue ScrollMagic Szenen für neuen Tab initialisieren
+  controllerInstance = initScrollMagicForActiveTab();
+}
+
+document.getElementById("defaultOpen").click();
+
+
+
     // Bilder und Vollbild-Funktionalität
     const bubblesWithImages = {
-      renovierung:["20150529_210708.jpg","IMG_20181127_143356.jpg","20220131_010206.jpg"],
-      trockenbau: ["trockenbau1.jpg", "trockenbau2.jpg"],
+      renovierung:["IMG_20181127_143356.jpg","20150529_210708.jpg","20220131_010206.jpg"],
+      trockenbau: ["trockenbau_1.jpeg", "trockenbau_2.jpeg","trockenbau_4.jpeg"],
       küchenmontage: ["kh_4.jpeg", "kh1.jpeg"],
       tapezieren: ["IMG_20181208_191937.jpg"],
-      garten: ["garten1.jpg", "garten2.jpg"],
+      garten: ["IMG-20200503-WA0004.jpg", "IMG-20200416-WA0005.jpg"],
       werbeanlagen: ["20160319_181934.jpg", "20201202_183828.jpg", "20161208_025358.jpg"]
     };
 
     const bubbles = document.querySelectorAll(".bubble");
 
-bubbles.forEach(bubble => {
-  const id = bubble.dataset.fullscreenId;
-  if (bubblesWithImages[id]?.length > 0) {
-    bubble.style.backgroundImage = `url('${bubblesWithImages[id][0]}')`;
-  }
+document.querySelectorAll(".bubble").forEach(bubble => {
+    const id = bubble.dataset.fullscreenId;
+    if (bubblesWithImages[id]?.length > 0) {
+      bubble.style.backgroundImage = `url('${bubblesWithImages[id][0]}')`;
+      bubble.style.backgroundSize = "cover";
+      bubble.style.backgroundPosition = "center";
+    }
 
-  // Entferne folgenden Block (Vorschaubild) komplett:
-  // const firstImg = document.createElement("img");
-  // firstImg.src = ... 
-  // bubble.appendChild(firstImg);
-
-  bubble.addEventListener("click", () => {
-    openFullscreenBubble(id);
+    bubble.addEventListener("click", () => openFullscreenBubble(id, bubble));
   });
-});
 
     // Vollbild-Bubble
 function openFullscreenBubble(id) {
@@ -462,10 +679,16 @@ function openFullscreenBubble(id) {
   fullscreen.scrollTop = 0;
 }
   </script>
-  <footer>
+ <footer>
   <div class="footer-content">
     <p>© 2025 Abu-Shagrah Handwerk. Alle Rechte vorbehalten.</p>
-    <p>Telefon: <a href="tel:+491234567890">+49 173 8401400</a> | E-Mail: <a href="mailto:info@abu-shagrah.de">abu-shagrah@web.de</a></p>
+    <p>
+      Telefon: <a href="tel:+491738401400">+49 173 8401400</a> |
+      E-Mail: <a href="mailto:abu-shagrah@web.de">abu-shagrah@web.de</a>
+    </p>
+    <p>
+      <a href="datenschutz.html">Datenschutz</a>
+    </p>
   </div>
 </footer>
 
