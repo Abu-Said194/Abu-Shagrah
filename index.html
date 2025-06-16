@@ -19,7 +19,9 @@
       padding: 0;
       background: #f9f9f9;
       color: #222;
-	  overflow-x: hidden;
+	   overflow-x: hidden;  /* disables horizontal scroll */
+  touch-action: pan-y; /* allows vertical scroll but disables horizontal pan */
+  overscroll-behavior-x: contain; /* prevent overscroll in X direction */
     }
 
     .ABU {
